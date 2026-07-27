@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pebble - ¡Aventura Glacial!</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Bricolage+Grotesque:wght@800&family=JetBrains+Mono:wght@600&family=Baloo+2:wght@700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#f9bc46",
+                    "on-tertiary-container": "#fffbff",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#bfc8d0",
+                    "on-secondary-container": "#6c0300",
+                    "tertiary-container": "#996d00",
+                    "secondary": "#ac3323",
+                    "secondary-container": "#fd6e58",
+                    "surface-container": "#e3efff",
+                    "on-primary-container": "#fcfcff",
+                    "background": "#f7f9ff",
+                    "on-tertiary-fixed": "#271900",
+                    "outline": "#6f787f",
+                    "secondary-fixed-dim": "#ffb4a7",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#d4e4f8",
+                    "on-background": "#0d1d2b",
+                    "surface-tint": "#00658d",
+                    "surface-container-low": "#edf4ff",
+                    "on-tertiary-fixed-variant": "#5e4200",
+                    "on-surface": "#0d1d2b",
+                    "on-secondary-fixed": "#400100",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#d4e4f8",
+                    "on-primary-fixed": "#001e2d",
+                    "inverse-on-surface": "#e8f1ff",
+                    "surface-bright": "#f7f9ff",
+                    "tertiary-fixed": "#ffdea8",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#3f484f",
+                    "primary-fixed": "#c6e7ff",
+                    "surface-container-high": "#daeafe",
+                    "primary-fixed-dim": "#82cfff",
+                    "inverse-surface": "#233241",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#8a1a0e",
+                    "on-primary-fixed-variant": "#004c6b",
+                    "surface-dim": "#ccdcf0",
+                    "on-primary": "#ffffff",
+                    "primary": "#006389",
+                    "primary-container": "#097dac",
+                    "tertiary": "#795500",
+                    "inverse-primary": "#82cfff",
+                    "secondary-fixed": "#ffdad4",
+                    "surface": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "margin-desktop": "40px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "margin-mobile": "20px",
+                    "md": "16px",
+                    "unit": "4px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "label-mono": ["JetBrains Mono"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Bricolage Grotesque"],
+                    "display-lg-mobile": ["Bricolage Grotesque"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "baloo": ["Baloo 2"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-mono": ["14px", {"lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .tactile-button {
+            transition: all 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            top: 0;
+        }
+        .tactile-button:active {
+            top: 4px;
+            box-shadow: none !important;
+        }
+
+        .ice-card {
+            border: 2px solid rgba(13, 29, 43, 0.1);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .ice-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .spring-entry {
+            animation: springIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes springIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Custom scrollbar for Ice vibe */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f7f9ff; }
+        ::-webkit-scrollbar-thumb { background: #c6e7ff; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- Top Navigation (Shell Implementation) -->
+<header class="bg-surface border-b-4 border-surface-variant z-50 fixed top-0 w-full">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="text-headline-md-mobile font-headline-md font-black text-primary tracking-tighter hover:scale-105 transition-transform cursor-pointer">
+                Pebble
+            </div>
+<nav class="hidden md:flex gap-xl items-center">
+<a class="text-secondary font-black hover:scale-105 transition-transform" href="#">Nest</a>
+<a class="text-on-surface-variant hover:scale-105 transition-transform" href="#">Adventure</a>
+<a class="text-on-surface-variant hover:scale-105 transition-transform" href="#">Map</a>
+</nav>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary hover:scale-105 transition-transform cursor-pointer">toll</span>
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+<img alt="Student Profile Avatar" data-alt="A clean student profile avatar with a friendly expression, styled in a modern 2D vector aesthetic using a palette of blues and whites to match the glacial theme. The background is a soft blue circle, reinforcing the brand identity of Pebble." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo5JlJsSEeQUUF5GAvU6vhWo7B9TmnwQM_H4ZoVmIv-CBoy-FwVrQHmicy7D4GFLXFf7ckBVqjuyFZW_QVkFKxTm7KzRc3UJskZPx-l715kMsRlyTn9IOTeoA6z1i1x6HdAC84J5MhRzf3QoWX0holL-pp5-jBZ50mDq0D41aqCMftxr31moR2_NqeXrjDtPi7Kf1ZkqtE-qP-c_sjPKLv-ZRNbtHZ8CgLIfTmv9RUy_6vVIZab7zWsJnSuLmFHFaQtG8tuD1tgxo"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative px-margin-mobile md:px-margin-desktop py-12 md:py-24 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-xl">
+<div class="w-full md:w-1/2 space-y-md spring-entry">
+<span class="font-label-mono text-label-mono text-primary bg-primary-fixed px-3 py-1 rounded-full uppercase tracking-widest">Aventura Educativa</span>
+<h1 class="font-baloo text-display-lg-mobile md:text-display-lg text-primary leading-none">
+                    ¡Explora con Pebble en una <span class="text-secondary">Aventura Glacial!</span>
+</h1>
+<p class="text-body-lg text-on-surface-variant max-w-lg">
+                    Descubre el poder de aprender jugando en un mundo de hielo y desafíos. Pebble te guía a través de paisajes increíbles mientras dominas nuevas habilidades.
+                </p>
+<div class="pt-md flex flex-wrap gap-md">
+<!-- CTA Button -->
+<button class="tactile-button bg-secondary-container text-on-tertiary-container font-headline-md py-4 px-10 rounded-xl shadow-[0_6px_0_0_#ac3323] hover:brightness-110 active:translate-y-1 active:shadow-none">
+                        ¡Comienza gratis!
+                    </button>
+<button class="tactile-button bg-surface-container-highest text-primary font-headline-md py-4 px-10 rounded-xl border-2 border-primary-fixed-dim shadow-[0_4px_0_0_#82cfff] hover:bg-surface-bright">
+                        Ver video
+                    </button>
+</div>
+</div>
+<!-- Illustration Container -->
+<div class="w-full md:w-1/2 relative spring-entry" style="animation-delay: 0.2s">
+<div class="aspect-square bg-surface-container-low rounded-[40px] flex items-center justify-center p-8 relative overflow-hidden">
+<!-- Floating Ice Elements -->
+<div class="absolute top-10 right-10 w-24 h-24 bg-primary-fixed opacity-50 blur-3xl animate-pulse"></div>
+<div class="absolute bottom-10 left-10 w-32 h-32 bg-secondary-fixed-dim opacity-30 blur-3xl"></div>
+<img class="w-full max-w-md drop-shadow-2xl hover:rotate-3 transition-transform duration-500" data-alt="A clean, professional 2D vector illustration of Pebble, a friendly character mascot designed with smooth blue and white gradients. Pebble is positioned playfully in a minimalist arctic environment with floating geometric ice blocks. The style is high-contrast and tactile, featuring bold outlines and soft shadows, perfectly aligned with a glacial theme of light blues and crisp whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtDOXZqwrHyvuIVhwtaSoN_CXnYngP4Fg-Wqx69o7enxPpwgjYZAzENv5riHQJh1V7qrAgQdapmLteFXeLc7MugnuMeWALTigG8XkQVt_RxEq160lIQc0wJj3LeOTKQ8AxwcWTwO-I5s8Okq3NGsoUVyejYlXjNRnwtmc18l8FJyxQF9jiSopPtnnHioMA6XMMQPsPrYd3-KCQ_hFT6wxGNqrLLQJPoftbGBzHXIIWxyDHHmPkysUUZOPlU3FME81LlSuhKI1XX5M"/>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="bg-surface-container-low py-12 border-y-2 border-surface-variant">
+<div class="max-w-7xl mx-auto px-margin-mobile flex flex-wrap justify-center gap-xl md:gap-32">
+<div class="text-center">
+<div class="font-display-lg text-primary">50k+</div>
+<div class="font-label-mono text-on-surface-variant uppercase">Exploradores</div>
+</div>
+<div class="text-center">
+<div class="font-display-lg text-secondary">200+</div>
+<div class="font-label-mono text-on-surface-variant uppercase">Misiones</div>
+</div>
+<div class="text-center">
+<div class="font-display-lg text-primary">4.9/5</div>
+<div class="font-label-mono text-on-surface-variant uppercase">Calificación</div>
+</div>
+</div>
+</section>
+<!-- How it Works Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<div class="text-center mb-16 space-y-sm">
+<h2 class="font-baloo text-display-lg-mobile md:text-display-lg text-primary">¿Cómo funciona?</h2>
+<p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    Tres simples pasos para convertirte en un maestro de los glaciares. Diseñado para ser táctil, divertido y altamente educativo.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Card 1 -->
+<div class="ice-card bg-surface p-8 rounded-[20px] flex flex-col items-center text-center space-y-md">
+<div class="w-16 h-16 bg-primary-container text-on-primary-container rounded-2xl flex items-center justify-center shadow-[0_4px_0_0_#004c6b]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">nest_eco_leaf</span>
+</div>
+<h3 class="font-headline-md text-primary">Crea tu Nido</h3>
+<p class="text-body-md text-on-surface-variant">Personaliza tu espacio base con tesoros que encuentres en tus expediciones diarias.</p>
+</div>
+<!-- Card 2 -->
+<div class="ice-card bg-surface p-8 rounded-[20px] flex flex-col items-center text-center space-y-md">
+<div class="w-16 h-16 bg-secondary-container text-on-tertiary-container rounded-2xl flex items-center justify-center shadow-[0_4px_0_0_#ac3323]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">explore</span>
+</div>
+<h3 class="font-headline-md text-primary">Explora el Mapa</h3>
+<p class="text-body-md text-on-surface-variant">Navega por territorios desconocidos, resuelve acertijos y recolecta guijarros mágicos.</p>
+</div>
+<!-- Card 3 -->
+<div class="ice-card bg-surface p-8 rounded-[20px] flex flex-col items-center text-center space-y-md">
+<div class="w-16 h-16 bg-tertiary-fixed-dim text-on-tertiary-fixed rounded-2xl flex items-center justify-center shadow-[0_4px_0_0_#5e4200]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h3 class="font-headline-md text-primary">Gana Premios</h3>
+<p class="text-body-md text-on-surface-variant">Desbloquea habilidades únicas y equipamiento glacial para tu avatar Pebble.</p>
+</div>
+</div>
+</section>
+<!-- Bento Grid Feature Section -->
+<section class="py-12 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-md h-auto md:h-[600px]">
+<div class="md:col-span-2 md:row-span-2 bg-primary-container text-on-primary-container p-xl rounded-[32px] relative overflow-hidden flex flex-col justify-end group">
+<div class="absolute top-0 right-0 p-8">
+<span class="material-symbols-outlined text-8xl opacity-20 group-hover:scale-110 transition-transform duration-500">ac_unit</span>
+</div>
+<h4 class="font-display-lg-mobile text-headline-lg relative z-10">Mecánicas de Juego Físicas</h4>
+<p class="text-body-lg opacity-90 max-w-sm relative z-10">Siente cada movimiento. Nuestros controles están diseñados para una respuesta táctil satisfactoria.</p>
+</div>
+<div class="md:col-span-2 bg-surface-container-high p-lg rounded-[32px] flex items-center gap-md border-2 border-primary-fixed-dim">
+<div class="flex-1">
+<h4 class="font-headline-md text-primary">Desafíos Semanales</h4>
+<p class="text-body-md text-on-surface-variant">Nuevos mapas cada lunes para mantener la aventura fresca.</p>
+</div>
+<div class="w-24 h-24 bg-white rounded-2xl flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-primary text-4xl">calendar_month</span>
+</div>
+</div>
+<div class="md:col-span-1 bg-secondary-fixed p-lg rounded-[32px] flex flex-col justify-between border-2 border-secondary-fixed-dim">
+<span class="material-symbols-outlined text-secondary text-4xl">diversity_3</span>
+<h4 class="font-headline-md text-on-secondary-fixed-variant">Modo Cooperativo</h4>
+</div>
+<div class="md:col-span-1 bg-tertiary-fixed p-lg rounded-[32px] flex flex-col justify-between border-2 border-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-tertiary text-4xl">psychology</span>
+<h4 class="font-headline-md text-on-tertiary-fixed-variant">Aprendizaje Adaptativo</h4>
+</div>
+</div>
+</section>
+<!-- CTA Final Section -->
+<section class="py-24 px-margin-mobile text-center">
+<div class="max-w-3xl mx-auto bg-surface-container rounded-[40px] p-xl border-4 border-white shadow-xl">
+<h2 class="font-baloo text-display-lg-mobile md:text-headline-lg text-primary mb-6">¿Listo para saltar al hielo?</h2>
+<p class="text-body-lg text-on-surface-variant mb-10">Únete a miles de aventureros hoy mismo y empieza tu viaje con Pebble.</p>
+<button class="tactile-button bg-secondary-container text-on-tertiary-container font-headline-md py-6 px-16 rounded-2xl shadow-[0_8px_0_0_#ac3323] hover:scale-105 active:scale-95 text-headline-md">
+                    ¡Comienza mi Aventura!
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-dim pt-16 pb-32 md:pb-16 px-margin-mobile border-t-4 border-surface-variant">
+<div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-xl">
+<div class="col-span-2 md:col-span-1">
+<div class="text-headline-md font-black text-primary tracking-tighter mb-4">Pebble</div>
+<p class="text-on-surface-variant text-body-md">Haciendo que el aprendizaje sea tan divertido como una aventura en el hielo.</p>
+</div>
+<div>
+<h5 class="font-label-mono text-primary uppercase mb-4">Mapa</h5>
+<ul class="space-y-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Nest</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Aventura</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Eventos</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-mono text-primary uppercase mb-4">Soporte</h5>
+<ul class="space-y-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Ayuda</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Seguridad</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Padres</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-mono text-primary uppercase mb-4">Social</h5>
+<div class="flex gap-md">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border-2 border-surface-variant hover:border-primary cursor-pointer transition-all">
+<span class="material-symbols-outlined text-primary">share</span>
+</div>
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border-2 border-surface-variant hover:border-primary cursor-pointer transition-all">
+<span class="material-symbols-outlined text-primary">potted_plant</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-outline-variant text-center text-on-surface-variant text-xs">
+            © 2024 Pebble Adventure. Todos los derechos reservados.
+        </div>
+</footer>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-surface rounded-t-xl border-t-4 border-surface-variant shadow-[0_-4px_0_0_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg border-b-4 border-on-primary-fixed-variant p-2 transform -translate-y-1 transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-xs font-label-mono">Nest</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">sports_esports</span>
+<span class="text-xs font-label-mono">Adventure</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="text-xs font-label-mono">Map</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for buttons
+        document.querySelectorAll('.tactile-button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.98)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+        // Intersection Observer for spring entry animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('spring-entry');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            observer.observe(section);
+        });
+
+        // Specific handling for initial view
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('section')[0].style.opacity = '1';
+        });
+    </script>
+</body></html>

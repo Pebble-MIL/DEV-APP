@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .tactile-btn {
+    @apply relative transition-all duration-100 active:translate-y-1;
+    box-shadow: 0 4px 0 0 theme('colors.primary-fixed-dim');
+  }
+  .tactile-btn:active {
+    box-shadow: 0 0 0 0 transparent;
+  }
+  .tactile-card {
+    @apply border-2 border-on-surface/10 rounded-2xl transition-all duration-100;
+    box-shadow: 0 4px 0 0 theme('colors.outline-variant');
+  }
+  .tactile-card:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 0 transparent;
+  }
+  .pebble-shadow {
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+  }
+  .pebble-shadow:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+  }
+  .dialog-bubble {
+    @apply relative bg-white border-4 border-deep-ink p-5 rounded-2xl;
+    box-shadow: 6px 6px 0 0 #1C2B3A;
+  }
+  .dialog-bubble::before {
+    content: '';
+    @apply absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-white border-l-4 border-t-4 border-deep-ink rotate-45;
+  }
+}
+
+@layer utilities {
+  .island-path {
+    background-image: radial-gradient(circle, #bfc8d0 2px, transparent 2px);
+    background-size: 24px 24px;
+  }
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}

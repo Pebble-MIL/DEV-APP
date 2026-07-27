@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pebble - Quiz de Aventura</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Bricolage+Grotesque:wght@800&amp;family=JetBrains+Mono:wght@600&amp;family=Baloo+2:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#f9bc46",
+              "on-tertiary-container": "#fffbff",
+              "on-tertiary": "#ffffff",
+              "outline-variant": "#bfc8d0",
+              "on-secondary-container": "#6c0300",
+              "tertiary-container": "#996d00",
+              "secondary": "#ac3323",
+              "secondary-container": "#fd6e58",
+              "surface-container": "#e3efff",
+              "on-primary-container": "#fcfcff",
+              "background": "#f7f9ff",
+              "on-tertiary-fixed": "#271900",
+              "outline": "#6f787f",
+              "secondary-fixed-dim": "#ffb4a7",
+              "on-error": "#ffffff",
+              "surface-container-highest": "#d4e4f8",
+              "on-background": "#0d1d2b",
+              "surface-tint": "#00658d",
+              "surface-container-low": "#edf4ff",
+              "on-tertiary-fixed-variant": "#5e4200",
+              "on-surface": "#0d1d2b",
+              "on-secondary-fixed": "#400100",
+              "surface-container-lowest": "#ffffff",
+              "surface-variant": "#d4e4f8",
+              "on-primary-fixed": "#001e2d",
+              "inverse-on-surface": "#e8f1ff",
+              "surface-bright": "#f7f9ff",
+              "tertiary-fixed": "#ffdea8",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#3f484f",
+              "primary-fixed": "#c6e7ff",
+              "surface-container-high": "#daeafe",
+              "primary-fixed-dim": "#82cfff",
+              "inverse-surface": "#233241",
+              "error": "#ba1a1a",
+              "on-secondary-fixed-variant": "#8a1a0e",
+              "on-primary-fixed-variant": "#004c6b",
+              "surface-dim": "#ccdcf0",
+              "on-primary": "#ffffff",
+              "primary": "#006389",
+              "primary-container": "#097dac",
+              "tertiary": "#795500",
+              "inverse-primary": "#82cfff",
+              "secondary-fixed": "#ffdad4",
+              "surface": "#f7f9ff",
+              "on-error-container": "#93000a",
+              "error-container": "#ffdad6",
+              "deep-ink": "#1C2B3A"
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "lg": "24px",
+              "margin-desktop": "40px",
+              "xs": "4px",
+              "sm": "8px",
+              "xl": "32px",
+              "margin-mobile": "20px",
+              "md": "16px",
+              "unit": "4px",
+              "gutter": "16px"
+            },
+            fontFamily: {
+              "body-md": ["Plus Jakarta Sans"],
+              "headline-lg": ["Plus Jakarta Sans"],
+              "label-mono": ["JetBrains Mono"],
+              "body-lg": ["Plus Jakarta Sans"],
+              "display-lg": ["Bricolage Grotesque"],
+              "display-lg-mobile": ["Bricolage Grotesque"],
+              "headline-md": ["Plus Jakarta Sans"],
+              "baloo": ["Baloo 2", "cursive"]
+            },
+            fontSize: {
+              "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "500" }],
+              "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+              "label-mono": ["14px", { "lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+              "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "500" }],
+              "display-lg": ["48px", { "lineHeight": "1.1", "fontWeight": "800" }],
+              "display-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "800" }],
+              "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      body {
+        background-color: #f7f9ff;
+        color: #1C2B3A;
+      }
+      .tactile-card {
+        transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.1s ease;
+        box-shadow: 0 4px 0 0 #bfc8d0;
+      }
+      .tactile-card:active {
+        transform: translateY(4px);
+        box-shadow: 0 0 0 0 transparent;
+      }
+      .primary-tactile {
+        box-shadow: 0 4px 0 0 #004c6b;
+      }
+      .primary-tactile:active {
+        transform: translateY(4px);
+        box-shadow: 0 0 0 0 transparent;
+      }
+      .spring-in {
+        animation: springIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        opacity: 0;
+      }
+      @keyframes springIn {
+        0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+        100% { transform: scale(1) translateY(0); opacity: 1; }
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- Top Navigation / Shell Suppression Check: User is in focused quiz task, so TopAppBar is minimal or suppressed -->
+<header class="fixed top-0 left-0 w-full bg-surface z-50 px-margin-mobile py-4 border-b-4 border-surface-variant">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">landscape</span>
+<span class="text-headline-md-mobile font-headline-md font-black text-primary tracking-tighter">Pebble</span>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container hover:scale-105 transition-transform active:translate-y-1">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-12 px-margin-mobile max-w-2xl mx-auto w-full">
+<!-- Progress Bar Section -->
+<div class="mb-10 w-full space-y-3">
+<div class="flex justify-between items-end">
+<span class="font-label-mono text-label-mono text-deep-ink uppercase tracking-widest">Aventura en marcha</span>
+<span class="font-label-mono text-label-mono text-primary font-black">1 de 3</span>
+</div>
+<div class="h-4 w-full bg-surface-variant rounded-full border-2 border-outline-variant p-0.5 overflow-hidden">
+<div class="h-full bg-primary rounded-full w-1/3 transition-all duration-700 ease-out" style="box-shadow: inset 0 2px 4px rgba(255,255,255,0.3);"></div>
+</div>
+</div>
+<!-- Pebble Character Interaction -->
+<div class="flex flex-col items-center mb-12 spring-in" style="animation-delay: 0.1s;">
+<div class="relative w-32 h-32 mb-6">
+<div class="absolute inset-0 bg-primary-fixed rounded-full animate-pulse opacity-50"></div>
+<img class="w-full h-full object-contain relative z-10 drop-shadow-lg" data-alt="A cute, round anthropomorphic pebble character with large expressive eyes and a friendly smile, sitting in a cozy sunlit cave. The art style is high-contrast 3D cartoon with thick outlines and soft lighting, using a palette of glacier blue and warm earth tones. The character is holding a shiny, glowing crystal with magical sparkles." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2cPU_FWhXt6Z3AP0TvBmvaR0nHP99Q61P_iO9zUmWEj364tB-ZvCw8jkpC72iEa7n2sGAufEK9S4Fp2CHkoPNQ_MyPeR58UrLVNMhbDTEz6-iTBAFnUb3iwkahTzVN8BOoNd0g5m1Dds01n6DLBtzCK1yimqbOsF-jr1_PvDi8NxdajjyVWr5brbRfDXTC4uMg6uz7peRJ_k-MyVN-2w6rhFPSRiUgt_QhYDnDnTcp8xpGADFWsDJ7PBovu99xzC-1qwJP2v8DQQ"/>
+</div>
+<div class="relative bg-white border-4 border-deep-ink p-6 rounded-2xl shadow-[6px_6px_0_0_#1C2B3A]">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-white border-l-4 border-t-4 border-deep-ink rotate-45"></div>
+<p class="font-baloo text-headline-md text-deep-ink text-center leading-tight">
+                    "¡Encontré una roca brillante frente a mi cueva! ¿Le tomo la foto donde se vea mi cueva también?"
+                </p>
+</div>
+</div>
+<!-- Tactile Card Options -->
+<div class="grid grid-cols-1 gap-6 mb-12">
+<!-- Option 1 -->
+<button class="tactile-card group w-full bg-white border-4 border-deep-ink p-4 rounded-xl flex items-center gap-4 text-left spring-in" style="animation-delay: 0.3s;">
+<div class="w-16 h-16 flex-shrink-0 bg-surface-container rounded-lg border-2 border-outline-variant flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-deep-ink">¡Sí, encuadre amplio!</h3>
+<p class="text-body-md text-on-surface-variant">Muestra todo el paisaje para dar contexto.</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward_ios</span>
+</button>
+<!-- Option 2 -->
+<button class="tactile-card group w-full bg-white border-4 border-deep-ink p-4 rounded-xl flex items-center gap-4 text-left spring-in" style="animation-delay: 0.4s;">
+<div class="w-16 h-16 flex-shrink-0 bg-surface-container rounded-lg border-2 border-outline-variant flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary" style="font-variation-settings: 'FILL' 1;">zoom_in</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-deep-ink">Solo la roca brillante</h3>
+<p class="text-body-md text-on-surface-variant">Haz un close-up para resaltar los detalles.</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward_ios</span>
+</button>
+<!-- Option 3 -->
+<button class="tactile-card group w-full bg-white border-4 border-deep-ink p-4 rounded-xl flex items-center gap-4 text-left spring-in" style="animation-delay: 0.5s;">
+<div class="w-16 h-16 flex-shrink-0 bg-surface-container rounded-lg border-2 border-outline-variant flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary" style="font-variation-settings: 'FILL' 1;">person_pin_circle</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-deep-ink">Tú y la roca juntos</h3>
+<p class="text-body-md text-on-surface-variant">¡Una selfie de aventura para el recuerdo!</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward_ios</span>
+</button>
+</div>
+<!-- Bottom Action -->
+<div class="flex justify-center spring-in" style="animation-delay: 0.7s;">
+<button class="primary-tactile bg-primary text-on-primary font-headline-md px-12 py-4 rounded-full border-4 border-deep-ink transition-all flex items-center gap-3">
+<span>Saltar</span>
+<span class="material-symbols-outlined">fast_forward</span>
+</button>
+</div>
+</main>
+<!-- Footer Space -->
+<div class="h-12"></div>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('.tactile-card').forEach(card => {
+            card.addEventListener('click', () => {
+                // Flash effect or transition logic
+                card.classList.add('bg-primary-container');
+                setTimeout(() => {
+                    card.classList.remove('bg-primary-container');
+                }, 200);
+            });
+        });
+
+        // Subtle parallax effect for the Pebble character
+        document.addEventListener('mousemove', (e) => {
+            const pebble = document.querySelector('main img');
+            const moveX = (e.clientX - window.innerWidth / 2) / 50;
+            const moveY = (e.clientY - window.innerHeight / 2) / 50;
+            if (pebble) {
+                pebble.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            }
+        });
+    </script>
+</body></html>

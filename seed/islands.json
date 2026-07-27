@@ -1,0 +1,37 @@
+[
+  {
+    "id": "isla_bahia_calma",
+    "name": "Bahía Calma",
+    "order": 1,
+    "requiredPebbles": 0,
+    "unlockedContentId": "intro_story"
+  },
+  {
+    "id": "isla_bosque_dorado",
+    "name": "Bosque Dorado",
+    "order": 2,
+    "requiredPebbles": 3,
+    "unlockedContentId": "bosque_story"
+  },
+  {
+    "id": "isla_cima_viento",
+    "name": "Cima del Viento",
+    "order": 3,
+    "requiredPebbles": 6,
+    "unlockedContentId": "cima_story"
+  },
+  {
+    "id": "isla_laguna_espejo",
+    "name": "Laguna Espejo",
+    "order": 4,
+    "requiredPebbles": 10,
+    "unlockedContentId": "laguna_story"
+  },
+  {
+    "id": "isla_glaciar_eterno",
+    "name": "Glaciar Eterno",
+    "order": 5,
+    "requiredPebbles": 15,
+    "unlockedContentId": "final_story"
+  }
+]
