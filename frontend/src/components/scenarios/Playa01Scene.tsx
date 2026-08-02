@@ -65,7 +65,7 @@ export default function Playa01Scene({ foundClues, onClueFound }: SceneProps) {
       {found && (
         <g>
           <rect x="150" y="100" width="280" height="40" rx="20" fill="#097dac" opacity="0.95" />
-          <text x="290" y="125" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">🔍 ¡La cueva está visible! Mala idea...</text>
+          <text x="290" y="125" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">🔍 The cave is visible! Bad idea...</text>
         </g>
       )}
     </svg>

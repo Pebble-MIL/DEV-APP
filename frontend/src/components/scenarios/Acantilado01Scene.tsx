@@ -30,7 +30,7 @@ export default function Acantilado01Scene({ foundClues, onClueFound }: SceneProp
           <rect x="150" y="195" width="80" height="25" rx="5" fill="#097dac" />
           <text x="190" y="212" textAnchor="middle" fill="white" fontSize="10" fontFamily="monospace" fontWeight="bold">HOCKEY</text>
           <text x="190" y="240" textAnchor="middle" fill="#006389" fontSize="20" fontWeight="bold">07</text>
-          <text x="190" y="260" textAnchor="middle" fill="#3f484f" fontSize="8" fontFamily="monospace">OSOS POLARES</text>
+          <text x="190" y="260" textAnchor="middle" fill="#3f484f" fontSize="8" fontFamily="monospace">POLAR BEARS</text>
           <rect x="130" y="180" width="120" height="100" rx="10" fill="none" stroke="#fd6e58" strokeWidth="2" strokeDasharray="5,3" opacity="0.8">
             <animate attributeName="opacity" values="0.3;0.9;0.3" dur="2s" repeatCount="indefinite" />
           </rect>
@@ -67,12 +67,12 @@ export default function Acantilado01Scene({ foundClues, onClueFound }: SceneProp
       {found1 && (
         <rect x="115" y="155" width="150" height="22" rx="11" fill="#097dac" opacity="0.95" />
       )}
-      {found1 && <text x="190" y="170" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">🏒 Uniforme del equipo!</text>}
+      {found1 && <text x="190" y="170" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">🏒 Team uniform!</text>}
 
       {found2 && (
         <rect x="340" y="340" width="160" height="22" rx="11" fill="#097dac" opacity="0.95" />
       )}
-      {found2 && <text x="420" y="355" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">🏠 Reflejo de la casa!</text>}
+      {found2 && <text x="420" y="355" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">🏠 House reflection!</text>}
     </svg>
   )
 }

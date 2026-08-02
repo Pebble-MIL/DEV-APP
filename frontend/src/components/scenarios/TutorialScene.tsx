@@ -3,6 +3,8 @@ interface SceneProps {
   onClueFound?: (clueId: string) => void
 }
 
+import pebbleHandUp from '../../assets/pebble_hand_up.png'
+
 export default function TutorialScene({ foundClues, onClueFound }: SceneProps) {
   const found = foundClues.includes('tutorial_clue_1')
 
@@ -69,7 +71,8 @@ export default function TutorialScene({ foundClues, onClueFound }: SceneProps) {
       {found && (
         <g>
           <rect x="200" y="130" width="200" height="40" rx="20" fill="#097dac" opacity="0.95" />
-          <text x="300" y="155" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">🐧 Pista encontrada: la ventana!</text>
+          <image href={pebbleHandUp} x="210" y="138" width="18" height="18" />
+          <text x="300" y="155" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">Clue found: the window!</text>
         </g>
       )}
     </svg>

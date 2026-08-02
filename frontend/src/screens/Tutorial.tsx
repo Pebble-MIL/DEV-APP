@@ -11,24 +11,24 @@ interface TutorialProps {
 
 const STEPS = [
   {
-    message: '¡Bienvenido a tu primera aventura! Voy a mostrarte cómo funciona esto.',
+    message: 'Welcome to your first adventure! I\'ll show you how this works.',
     instruction: null,
   },
   {
-    message: 'En cada escenario, hay pistas escondidas. Toca la imagen donde creas que hay información que deberíamos revisar.',
-    instruction: 'Toca el área marcada en la imagen para practicar',
+    message: 'In each scenario, there are hidden clues. Tap the image where you think there is information we should review.',
+    instruction: 'Tap the marked area on the image to practice',
     clueArea: { x: 50, y: 50, radius: 40 },
   },
   {
-    message: '¡Lo encontraste! Cuando encuentras una pista, yo te explico por qué es importante.',
+    message: 'You found it! When you find a clue, I explain why it\'s important.',
     instruction: null,
   },
   {
-    message: 'Después de buscar pistas, viene el checklist. Yo pienso en voz alta y tú me ayudas a decidir si hice bien o mal.',
+    message: 'After finding clues, comes the checklist. I think out loud and you help me decide if I did well or not.',
     instruction: null,
   },
   {
-    message: 'Cada buena decisión se convierte en una piedrita para nuestro nido. ¿Entendiste? ¡Vamos a jugar de verdad!',
+    message: 'Every good decision becomes a pebble for our nest. Got it? Let\'s play for real!',
     instruction: null,
   },
 ]
@@ -61,14 +61,14 @@ export default function Tutorial({ user, updateUser }: TutorialProps) {
       setShowPractice(step + 1 === 1)
     } else {
       updateUser({ tutorialCompleted: true })
-      navigate('/game')
+      navigate('/home')
     }
   }
 
   return (
     <div className="min-h-screen flex flex-col px-margin-mobile py-4 max-w-2xl mx-auto pb-32">
       <div className="flex items-center gap-3 mb-4">
-        <button onClick={() => navigate('/game')} className="text-on-surface-variant hover:text-primary">
+        <button onClick={() => navigate('/home')} className="text-on-surface-variant hover:text-primary">
           <span className="material-symbols-outlined">close</span>
         </button>
         <div className="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden">
@@ -112,7 +112,7 @@ export default function Tutorial({ user, updateUser }: TutorialProps) {
             : 'bg-primary text-on-primary'
         }`}
       >
-        {step < STEPS.length - 1 ? 'Siguiente' : '¡A Jugar!'}
+        {step < STEPS.length - 1 ? 'Next' : "Let's Play!"}
       </button>
     </div>
   )

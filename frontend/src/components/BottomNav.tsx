@@ -1,9 +1,10 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const tabs = [
-  { path: '/nest', icon: 'home', label: 'Nido' },
-  { path: '/game', icon: 'sports_esports', label: 'Aventura' },
-  { path: '/tutorial', icon: 'explore', label: 'Mapa' },
+  { path: '/home', icon: 'home', label: 'Home' },
+  { path: '/game', icon: 'sports_esports', label: 'Adventure' },
+  { path: '/nest', icon: 'nest_eco_leaf', label: 'Nest' },
+  { path: '/tutorial', icon: 'explore', label: 'Map' },
 ]
 
 export default function BottomNav() {

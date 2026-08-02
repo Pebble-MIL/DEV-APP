@@ -4,6 +4,8 @@ interface PebbleDialogProps {
   delay?: number
 }
 
+import pebbleHandUp from '../assets/pebble_hand_up.png'
+
 export default function PebbleDialog({ message, className = '', delay = 0 }: PebbleDialogProps) {
   return (
     <div
@@ -12,8 +14,8 @@ export default function PebbleDialog({ message, className = '', delay = 0 }: Peb
     >
       <div className="relative w-24 h-24 mb-4">
         <div className="absolute inset-0 bg-primary-fixed rounded-full animate-pulse-slow opacity-40" />
-        <div className="w-full h-full relative z-10 flex items-center justify-center text-5xl drop-shadow-lg">
-          🐧
+        <div className="w-full h-full relative z-10 flex items-center justify-center drop-shadow-lg">
+          <img src={pebbleHandUp} alt="Pebble" className="w-16 h-16 object-contain" />
         </div>
       </div>
       <div className="dialog-bubble max-w-lg mx-auto">

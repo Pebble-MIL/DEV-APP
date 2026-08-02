@@ -3,6 +3,35 @@ import { onAuthChange, loginAnonymously, initFirebaseAuth } from '../services/au
 import { api } from '../services/api'
 import type { UserState } from '../types'
 
+const STORAGE_KEY = 'pebble_user'
+
+function loadSavedUser(): UserState | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (raw) return JSON.parse(raw) as UserState
+  } catch {}
+  return null
+}
+
+function saveUser(u: UserState) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(u))
+}
+
+function clearSavedUser() {
+  localStorage.removeItem(STORAGE_KEY)
+}
+
+const DEFAULT_USER: UserState = {
+  uid: 'dev-user',
+  displayName: '',
+  age: 0,
+  password: '',
+  nestLevel: 'playa',
+  totalPebbles: 0,
+  unlockedIslandIds: ['isla_bahia_calma'],
+  tutorialCompleted: false,
+}
+
 export function useAuth() {
   const [user, setUser] = useState<UserState | null>(null)
   const [loading, setLoading] = useState(true)
@@ -11,59 +40,52 @@ export function useAuth() {
     let mounted = true
 
     async function init() {
+      // Try to restore saved user first
+      const saved = loadSavedUser()
+      if (saved) {
+        if (mounted) {
+          setUser(saved)
+          setLoading(false)
+        }
+        return
+      }
+
       try {
         const { auth } = await initFirebaseAuth()
 
         if (auth?._isDev) {
-          // Dev mode — auto-login
           await loginAnonymously()
           try { await api.verifyToken('dev') } catch {}
           if (mounted) {
-            setUser({
-              uid: 'dev-user',
-              displayName: 'Explorador',
-              nestLevel: 'playa',
-              totalPebbles: 0,
-              unlockedIslandIds: ['isla_bahia_calma'],
-              tutorialCompleted: false,
-            })
+            const u = { ...DEFAULT_USER }
+            setUser(u)
+            saveUser(u)
             setLoading(false)
           }
           return
         }
 
-        // Real Firebase mode
         const unsub = onAuthChange(async (fbUser: any) => {
           if (!mounted) return
           if (fbUser) {
             const token = await fbUser.getIdToken()
             localStorage.setItem('pebble_id_token', token)
             try { await api.verifyToken(token) } catch {}
-            setUser({
-              uid: fbUser.uid,
-              displayName: 'Explorador',
-              nestLevel: 'playa',
-              totalPebbles: 0,
-              unlockedIslandIds: ['isla_bahia_calma'],
-              tutorialCompleted: false,
-            })
+            const u = { ...DEFAULT_USER, uid: fbUser.uid }
+            setUser(u)
+            saveUser(u)
           } else {
             setUser(null)
+            clearSavedUser()
           }
           setLoading(false)
         })
         return () => unsub?.()
       } catch {
-        // Ultimate fallback
         if (mounted) {
-          setUser({
-            uid: 'dev-user',
-            displayName: 'Explorador',
-            nestLevel: 'playa',
-            totalPebbles: 0,
-            unlockedIslandIds: ['isla_bahia_calma'],
-            tutorialCompleted: false,
-          })
+          const u = { ...DEFAULT_USER }
+          setUser(u)
+          saveUser(u)
           setLoading(false)
         }
       }
@@ -77,20 +99,26 @@ export function useAuth() {
     setLoading(true)
     await loginAnonymously()
     try { await api.verifyToken('dev') } catch {}
-    setUser({
-      uid: 'dev-user',
-      displayName: 'Explorador',
-      nestLevel: 'playa',
-      totalPebbles: 0,
-      unlockedIslandIds: ['isla_bahia_calma'],
-      tutorialCompleted: false,
-    })
+    const u = { ...DEFAULT_USER }
+    setUser(u)
+    saveUser(u)
     setLoading(false)
   }
 
   const updateUser = (partial: Partial<UserState>) => {
-    setUser((prev) => (prev ? { ...prev, ...partial } : prev))
+    setUser((prev) => {
+      if (!prev) return prev
+      const next = { ...prev, ...partial }
+      saveUser(next)
+      return next
+    })
   }
 
-  return { user, loading, login, updateUser }
+  const logout = () => {
+    clearSavedUser()
+    setUser(null)
+    try { localStorage.removeItem('pebble_id_token') } catch {}
+  }
+
+  return { user, loading, login, updateUser, logout }
 }

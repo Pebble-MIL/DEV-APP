@@ -82,6 +82,8 @@ export interface QuizResult {
 export interface UserState {
   uid: string
   displayName: string
+  age: number
+  password: string
   nestLevel: string
   totalPebbles: number
   unlockedIslandIds: string[]

@@ -30,10 +30,10 @@ export default function Acantilado03Scene({ foundClues, onClueFound }: SceneProp
       ))}
 
       {/* Homework text */}
-      <text x="140" y="140" fill="#0d1d2b" fontSize="11" fontFamily="monospace">1. Resolver problemas de matemáticas</text>
-      <text x="140" y="165" fill="#0d1d2b" fontSize="11" fontFamily="monospace">2. Escribir una historia sobre el hielo</text>
-      <text x="140" y="190" fill="#0d1d2b" fontSize="11" fontFamily="monospace">3. Dibujar un pingüino y su hábitat</text>
-      <text x="140" y="230" fill="#097dac" fontSize="12" fontFamily="monospace" fontWeight="bold">✏️ Tarea completada!</text>
+      <text x="140" y="140" fill="#0d1d2b" fontSize="11" fontFamily="monospace">1. Solve math problems</text>
+      <text x="140" y="165" fill="#0d1d2b" fontSize="11" fontFamily="monospace">2. Write a story about ice</text>
+      <text x="140" y="190" fill="#0d1d2b" fontSize="11" fontFamily="monospace">3. Draw a penguin and its habitat</text>
+      <text x="140" y="230" fill="#097dac" fontSize="12" fontFamily="monospace" fontWeight="bold">✏️ Homework completed!</text>
 
       {/* Red grade */}
       <text x="400" y="140" fill="#ac3323" fontSize="16" fontWeight="bold" fontFamily="monospace">A+</text>
@@ -42,8 +42,8 @@ export default function Acantilado03Scene({ foundClues, onClueFound }: SceneProp
       {!found ? (
         <g onClick={() => onClueFound?.('acantilado_03_clue_1')} className="cursor-pointer">
           <rect x="120" y="280" width="160" height="30" rx="4" fill="#ffdad4" stroke="#ac3323" strokeWidth="1.5" />
-          <text x="130" y="298" fill="#ac3323" fontSize="12" fontFamily="monospace" fontWeight="bold">Nombre: Pepito P.</text>
-          <text x="130" y="308" fill="#ac3323" fontSize="9" fontFamily="monospace">4° Básico - Prof. Martina</text>
+          <text x="130" y="298" fill="#ac3323" fontSize="12" fontFamily="monospace" fontWeight="bold">Name: Pepito P.</text>
+          <text x="130" y="308" fill="#ac3323" fontSize="9" fontFamily="monospace">4th Grade - Teacher Martina</text>
           <rect x="120" y="280" width="160" height="30" rx="4" fill="none" stroke="#fd6e58" strokeWidth="2" strokeDasharray="5,3">
             <animate attributeName="opacity" values="0.3;0.9;0.3" dur="1.5s" repeatCount="indefinite" />
           </rect>
@@ -51,7 +51,7 @@ export default function Acantilado03Scene({ foundClues, onClueFound }: SceneProp
       ) : (
         <g>
           <rect x="120" y="280" width="160" height="30" rx="4" fill="#fd6e58" stroke="#ac3323" strokeWidth="2" opacity="0.9" />
-          <text x="130" y="298" fill="white" fontSize="12" fontFamily="monospace" fontWeight="bold">Nombre: 🚫 visible!</text>
+          <text x="130" y="298" fill="white" fontSize="12" fontFamily="monospace" fontWeight="bold">Name: 🚫 visible!</text>
         </g>
       )}
 
@@ -63,7 +63,7 @@ export default function Acantilado03Scene({ foundClues, onClueFound }: SceneProp
       {found && (
         <g>
           <rect x="120" y="50" width="360" height="25" rx="12" fill="#097dac" opacity="0.95" />
-          <text x="300" y="67" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">🔍 El nombre y la profesora están visibles!</text>
+          <text x="300" y="67" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">🔍 The name and teacher are visible!</text>
         </g>
       )}
     </svg>

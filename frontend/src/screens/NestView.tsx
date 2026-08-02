@@ -2,19 +2,21 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { UserState, NestState, Island, PebbleData } from '../types'
 import { api } from '../services/api'
+import pebbleHandUp from '../assets/pebble_hand_up.png'
 
 interface NestViewProps {
   user: UserState | null
   updateUser: (partial: Partial<UserState>) => void
+  onLogout?: () => void
 }
 
 const CATEGORY_META: Record<string, { label: string; emoji: string; bg: string; border: string }> = {
-  privacidad: { label: 'Privacidad', emoji: '🔒', bg: 'bg-[#097dac]', border: 'border-[#004c6b]' },
-  impulsividad: { label: 'Impulsividad', emoji: '⚡', bg: 'bg-[#fd6e58]', border: 'border-[#ac3323]' },
-  datos_sensibles: { label: 'Datos Sensibles', emoji: '🔍', bg: 'bg-[#f9bc46]', border: 'border-[#5e4200]' },
+  privacidad: { label: 'Privacy', emoji: '🔒', bg: 'bg-[#097dac]', border: 'border-[#004c6b]' },
+  impulsividad: { label: 'Impulsivity', emoji: '⚡', bg: 'bg-[#fd6e58]', border: 'border-[#ac3323]' },
+  datos_sensibles: { label: 'Sensitive Data', emoji: '🔍', bg: 'bg-[#f9bc46]', border: 'border-[#5e4200]' },
 }
 
-export default function NestView({ user, updateUser }: NestViewProps) {
+export default function NestView({ user, updateUser, onLogout }: NestViewProps) {
   const navigate = useNavigate()
   const [nest, setNest] = useState<NestState | null>(null)
   const [loading, setLoading] = useState(true)
@@ -55,7 +57,7 @@ export default function NestView({ user, updateUser }: NestViewProps) {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spring-bounce text-6xl">🐧</div>
+        <div className="animate-spring-bounce"><img src={pebbleHandUp} alt="Pebble" className="w-16 h-16 object-contain" /></div>
       </div>
     )
   }
@@ -79,14 +81,22 @@ export default function NestView({ user, updateUser }: NestViewProps) {
       <header className="bg-surface border-b-4 border-surface-variant sticky top-0 z-50">
         <div className="flex justify-between items-center w-full px-5 py-4 max-w-7xl mx-auto">
           <div className="font-bold text-headline-md text-primary tracking-tighter">Pebble</div>
-          <div className="font-mono text-label-mono text-primary">{totalPebbles} 🪨</div>
+          <div className="flex items-center gap-3">
+            <button className="text-on-surface-variant hover:text-primary transition-colors" title="Settings">
+              <span className="material-symbols-outlined">settings</span>
+            </button>
+            <button onClick={onLogout} className="text-on-surface-variant hover:text-primary transition-colors" title="Log out">
+              <span className="material-symbols-outlined">logout</span>
+            </button>
+            <div className="font-mono text-label-mono text-primary">{totalPebbles} 🪨</div>
+          </div>
         </div>
       </header>
 
       {newUnlock && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-primary-container text-on-primary-container px-6 py-4 rounded-2xl border-2 border-primary shadow-xl animate-spring-in text-center">
           <p className="text-3xl mb-1">🗺️</p>
-          <p className="font-bold text-headline-md">¡Desbloqueaste {newUnlock.name}!</p>
+          <p className="font-bold text-headline-md">You unlocked {newUnlock.name}!</p>
         </div>
       )}
 
@@ -95,7 +105,7 @@ export default function NestView({ user, updateUser }: NestViewProps) {
         <section className="text-center">
           <div className="relative inline-block py-8 px-12 bg-surface-container-high rounded-[40px] border-2 border-outline-variant animate-spring-bounce">
             <div className="absolute -top-4 -left-4 bg-tertiary-fixed text-on-tertiary-fixed font-bold px-4 py-1 rounded-full border-2 border-tertiary shadow-sm -rotate-12">
-              Mi Nido {LEVEL_EMOJI[nestLevel]}
+              My Nest {LEVEL_EMOJI[nestLevel]}
             </div>
             <div className="grid grid-cols-4 gap-3">
               {pebbles.slice(0, 12).map((p, i) => (
@@ -107,13 +117,13 @@ export default function NestView({ user, updateUser }: NestViewProps) {
               ))}
               {pebbles.length === 0 && (
                 <div className="col-span-4 text-center py-4">
-                  <p className="text-body-md text-on-surface-variant">Aún no hay piedritas. ¡Ve a jugar!</p>
+                  <p className="text-body-md text-on-surface-variant">No pebbles yet. Go play!</p>
                 </div>
               )}
             </div>
           </div>
           <p className="mt-6 font-bold text-headline-md text-on-surface-variant">
-            Has recolectado <span className="text-primary">{totalPebbles}</span> piedritas
+            You've collected <span className="text-primary">{totalPebbles}</span> pebbles
           </p>
         </section>
 
@@ -137,7 +147,7 @@ export default function NestView({ user, updateUser }: NestViewProps) {
                   />
                 ))}
                 {items.length === 0 && (
-                  <p className="text-body-md text-on-surface-variant italic">Sin piedritas aún</p>
+                  <p className="text-body-md text-on-surface-variant italic">No pebbles yet</p>
                 )}
               </div>
             </section>
@@ -146,7 +156,7 @@ export default function NestView({ user, updateUser }: NestViewProps) {
 
         {/* Island Progress */}
         <section className="island-path p-6 rounded-2xl border-2 border-outline-variant bg-surface">
-          <h3 className="font-bold text-headline-md text-on-surface mb-6">Ruta del Aventurero</h3>
+          <h3 className="font-bold text-headline-md text-on-surface mb-6">Adventurer's Path</h3>
           <div className="relative flex flex-col items-center gap-8">
             {[
               ...islands,
@@ -182,7 +192,7 @@ export default function NestView({ user, updateUser }: NestViewProps) {
                           <div className={`h-full rounded-full transition-all duration-700 ${isUnlocked ? 'bg-primary' : 'bg-tertiary-fixed-dim'}`} style={{ width: `${progress}%` }} />
                         </div>
                         <span className="font-mono text-label-mono text-on-surface-variant text-xs">
-                          {isUnlocked ? 'Completado' : `${progress}%`}
+                          {isUnlocked ? 'Completed' : `${progress}%`}
                         </span>
                       </div>
                     </div>
@@ -197,7 +207,7 @@ export default function NestView({ user, updateUser }: NestViewProps) {
           onClick={() => navigate('/game')}
           className="tactile-btn w-full bg-primary text-on-primary font-bold py-4 px-6 rounded-2xl text-headline-md flex items-center justify-center gap-2"
         >
-          <span>¡Seguir explorando!</span>
+          <span>Keep exploring!</span>
         </button>
       </main>
     </div>

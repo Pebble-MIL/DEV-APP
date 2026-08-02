@@ -7,83 +7,83 @@ const _store: Record<string, any> = {
 const SCENARIOS = [
   {
     id: 'tutorial_01', type: 'photo', nestLevelTarget: 'playa', mediaUrl: '', difficulty: 1,
-    promptText: '¡Mira esta foto que tomé! Quiero compartirla con la colonia. ¿Puedes ayudarme a encontrar qué cosas deberíamos revisar antes de publicarla?',
-    hiddenClues: [{ clueId: 'tutorial_clue_1', category: 'privacidad', coordinates: { x: 180, y: 218, radius: 30 }, textSpan: null, explanation: '¡Aquí hay una ventana! Si se ve mi cueva, otros pingüinos sabrían dónde vivo.' }],
+    promptText: 'Look at this photo I took! I want to share it with the colony. Can you help me find what things we should check before posting it?',
+    hiddenClues: [{ clueId: 'tutorial_clue_1', category: 'privacidad', coordinates: { x: 180, y: 218, radius: 30 }, textSpan: null, explanation: 'There is a window here! If my cave is visible, other penguins would know where I live.' }],
   },
   {
     id: 'playa_01', type: 'photo', nestLevelTarget: 'playa', mediaUrl: '', difficulty: 1,
-    promptText: '¡Encontré una roca brillante! ¿Le tomo la foto donde se vea mi cueva también?',
-    hiddenClues: [{ clueId: 'playa_01_clue_1', category: 'privacidad', coordinates: { x: 160, y: 260, radius: 55 }, textSpan: null, explanation: '¡Oh! Ahí está mi cueva de fondo. Si la foto muestra dónde vivo, cualquier pingüino podría venir.' }],
+    promptText: 'I found a shiny rock! Should I take the photo where my cave is also visible?',
+    hiddenClues: [{ clueId: 'playa_01_clue_1', category: 'privacidad', coordinates: { x: 160, y: 260, radius: 55 }, textSpan: null, explanation: 'Oh! My cave is in the background. If the photo shows where I live, any penguin could come.' }],
   },
   {
     id: 'playa_02', type: 'message', nestLevelTarget: 'playa', mediaUrl: '', difficulty: 1,
-    promptText: 'Un pingüino nuevo me preguntó cómo me llamo. ¿Le digo mi nombre completo?',
-    hiddenClues: [{ clueId: 'playa_02_clue_1', category: 'datos_sensibles', coordinates: null, textSpan: { start: 10, end: 35 }, explanation: '¡Espera! No conocemos bien a ese pingüino. Mejor solo mi nombre de juego.' }],
+    promptText: 'A new penguin asked me what my name is. Should I tell him my full name?',
+    hiddenClues: [{ clueId: 'playa_02_clue_1', category: 'datos_sensibles', coordinates: null, textSpan: { start: 10, end: 35 }, explanation: 'Wait! We don\'t know that penguin well. Better to just use my game name.' }],
   },
   {
     id: 'playa_03', type: 'photo', nestLevelTarget: 'playa', mediaUrl: '', difficulty: 1,
-    promptText: 'Mirá este selfie que me saqué con mi nuevo sombrero. ¿Está bien para subirlo?',
-    hiddenClues: [{ clueId: 'playa_03_clue_1', category: 'privacidad', coordinates: { x: 440, y: 135, radius: 40 }, textSpan: null, explanation: '¡Veo el nombre de mi escuela en el fondo! No quiero que sepan dónde paso mis días.' }],
+    promptText: 'Look at this selfie I took with my new hat. Is it okay to upload it?',
+    hiddenClues: [{ clueId: 'playa_03_clue_1', category: 'privacidad', coordinates: { x: 440, y: 135, radius: 40 }, textSpan: null, explanation: 'I see the name of my school in the background! I don\'t want them to know where I spend my days.' }],
   },
   {
     id: 'acantilado_01', type: 'photo', nestLevelTarget: 'acantilado', mediaUrl: '', difficulty: 2,
-    promptText: '¡Miren! Me probé el uniforme nuevo del equipo de hockey. ¿Qué opinan de la foto?',
+    promptText: 'Look! I tried on the new hockey team uniform. What do you think of the photo?',
     hiddenClues: [
-      { clueId: 'acantilado_01_clue_1', category: 'datos_sensibles', coordinates: { x: 190, y: 230, radius: 50 }, textSpan: null, explanation: 'El uniforme tiene el nombre de mi equipo y escuela.' },
-      { clueId: 'acantilado_01_clue_2', category: 'privacidad', coordinates: { x: 420, y: 300, radius: 40 }, textSpan: null, explanation: 'El reflejo en el hielo muestra mi casa.' },
+      { clueId: 'acantilado_01_clue_1', category: 'datos_sensibles', coordinates: { x: 190, y: 230, radius: 50 }, textSpan: null, explanation: 'The uniform has the name of my team and school.' },
+      { clueId: 'acantilado_01_clue_2', category: 'privacidad', coordinates: { x: 420, y: 300, radius: 40 }, textSpan: null, explanation: 'The reflection in the ice shows my house.' },
     ],
   },
   {
     id: 'acantilado_02', type: 'message', nestLevelTarget: 'acantilado', mediaUrl: '', difficulty: 2,
-    promptText: '¡Estoy muy enojado! Otro pingüino me quitó mi pescado. Quiero contarlo ya mismo.',
+    promptText: 'I am very angry! Another penguin took my fish. I want to tell everyone right now.',
     hiddenClues: [
-      { clueId: 'acantilado_02_clue_1', category: 'impulsividad', coordinates: null, textSpan: { start: 0, end: 18 }, explanation: 'Cuando estamos enojados a veces decimos cosas que después lamentamos.' },
-      { clueId: 'acantilado_02_clue_2', category: 'datos_sensibles', coordinates: null, textSpan: { start: 35, end: 55 }, explanation: 'Contar esto a toda la colonia es demasiado.' },
+      { clueId: 'acantilado_02_clue_1', category: 'impulsividad', coordinates: null, textSpan: { start: 0, end: 18 }, explanation: 'When we are angry we sometimes say things we regret later.' },
+      { clueId: 'acantilado_02_clue_2', category: 'datos_sensibles', coordinates: null, textSpan: { start: 35, end: 55 }, explanation: 'Telling this to the whole colony is too much.' },
     ],
   },
   {
     id: 'acantilado_03', type: 'photo', nestLevelTarget: 'acantilado', mediaUrl: '', difficulty: 2,
-    promptText: '¡Terminé mi tarea! Le saqué una foto a mi cuaderno para mostrárselo a mis amigos.',
-    hiddenClues: [{ clueId: 'acantilado_03_clue_1', category: 'datos_sensibles', coordinates: { x: 200, y: 295, radius: 60 }, textSpan: null, explanation: '¡Ahí se ve mi nombre completo y el de mi profesora!' }],
+    promptText: 'I finished my homework! I took a photo of my notebook to show my friends.',
+    hiddenClues: [{ clueId: 'acantilado_03_clue_1', category: 'datos_sensibles', coordinates: { x: 200, y: 295, radius: 60 }, textSpan: null, explanation: 'There you can see my full name and my teacher\'s!' }],
   },
   {
     id: 'glaciar_01', type: 'photo', nestLevelTarget: 'glaciar', mediaUrl: '', difficulty: 3,
-    promptText: '¡Qué día tan divertido! Miren todas las fotos que tomé hoy en la excursión.',
+    promptText: 'What a fun day! Look at all the photos I took today on the trip.',
     hiddenClues: [
-      { clueId: 'glaciar_01_clue_1', category: 'datos_sensibles', coordinates: { x: 85, y: 218, radius: 20 }, textSpan: null, explanation: 'El reloj que uso tiene el logo de mi club.' },
-      { clueId: 'glaciar_01_clue_2', category: 'privacidad', coordinates: { x: 475, y: 208, radius: 35 }, textSpan: null, explanation: 'El cartel detrás dice el nombre del lugar exacto.' },
-      { clueId: 'glaciar_01_clue_3', category: 'impulsividad', coordinates: null, textSpan: { start: 0, end: 15 }, explanation: 'Publicar todo de golpe sin revisar es tentador.' },
+      { clueId: 'glaciar_01_clue_1', category: 'datos_sensibles', coordinates: { x: 85, y: 218, radius: 20 }, textSpan: null, explanation: 'The watch I wear has my club\'s logo.' },
+      { clueId: 'glaciar_01_clue_2', category: 'privacidad', coordinates: { x: 475, y: 208, radius: 35 }, textSpan: null, explanation: 'The sign behind says the name of the exact location.' },
+      { clueId: 'glaciar_01_clue_3', category: 'impulsividad', coordinates: null, textSpan: { start: 0, end: 15 }, explanation: 'Posting everything at once without checking is tempting.' },
     ],
   },
   {
     id: 'glaciar_02', type: 'message', nestLevelTarget: 'glaciar', mediaUrl: '', difficulty: 3,
-    promptText: 'Mira lo que me contaron: van a inspeccionar todos los nidos del sector norte. ¡Corre la voz!',
+    promptText: 'Look what I was told: they are going to inspect all the nests in the north sector. Spread the word!',
     hiddenClues: [
-      { clueId: 'glaciar_02_clue_1', category: 'impulsividad', coordinates: null, textSpan: { start: 0, end: 20 }, explanation: 'Compartir algo que no verificamos puede causar preocupación innecesaria.' },
-      { clueId: 'glaciar_02_clue_2', category: 'datos_sensibles', coordinates: null, textSpan: { start: 50, end: 75 }, explanation: 'El sector norte es donde vivo.' },
+      { clueId: 'glaciar_02_clue_1', category: 'impulsividad', coordinates: null, textSpan: { start: 0, end: 20 }, explanation: 'Sharing something we haven\'t verified can cause unnecessary worry.' },
+      { clueId: 'glaciar_02_clue_2', category: 'datos_sensibles', coordinates: null, textSpan: { start: 50, end: 75 }, explanation: 'The north sector is where I live.' },
     ],
   },
   {
     id: 'glaciar_03', type: 'photo', nestLevelTarget: 'glaciar', mediaUrl: '', difficulty: 3,
-    promptText: '¡Mi primer día de clases! Acá estoy con mis nuevos amigos. ¿La comparto?',
+    promptText: 'My first day of school! Here I am with my new friends. Should I share it?',
     hiddenClues: [
-      { clueId: 'glaciar_03_clue_1', category: 'datos_sensibles', coordinates: { x: 430, y: 90, radius: 40 }, textSpan: null, explanation: 'El horario de clases está pegado en la pared.' },
-      { clueId: 'glaciar_03_clue_2', category: 'privacidad', coordinates: { x: 220, y: 260, radius: 60 }, textSpan: null, explanation: 'Mis nuevos amigos también salen en la foto.' },
+      { clueId: 'glaciar_03_clue_1', category: 'datos_sensibles', coordinates: { x: 430, y: 90, radius: 40 }, textSpan: null, explanation: 'The class schedule is posted on the wall.' },
+      { clueId: 'glaciar_03_clue_2', category: 'privacidad', coordinates: { x: 220, y: 260, radius: 60 }, textSpan: null, explanation: 'My new friends also appear in the photo.' },
     ],
   },
 ]
 
 const ISLANDS = [
-  { id: 'isla_bahia_calma', name: 'Bahía Calma', order: 1, requiredPebbles: 0, unlockedContentId: 'intro_story' },
-  { id: 'isla_bosque_dorado', name: 'Bosque Dorado', order: 2, requiredPebbles: 3, unlockedContentId: 'bosque_story' },
-  { id: 'isla_cima_viento', name: 'Cima del Viento', order: 3, requiredPebbles: 6, unlockedContentId: 'cima_story' },
-  { id: 'isla_laguna_espejo', name: 'Laguna Espejo', order: 4, requiredPebbles: 10, unlockedContentId: 'laguna_story' },
-  { id: 'isla_glaciar_eterno', name: 'Glaciar Eterno', order: 5, requiredPebbles: 15, unlockedContentId: 'final_story' },
+  { id: 'isla_bahia_calma', name: 'Calm Bay', order: 1, requiredPebbles: 0, unlockedContentId: 'intro_story' },
+  { id: 'isla_bosque_dorado', name: 'Golden Forest', order: 2, requiredPebbles: 3, unlockedContentId: 'bosque_story' },
+  { id: 'isla_cima_viento', name: 'Wind Peak', order: 3, requiredPebbles: 6, unlockedContentId: 'cima_story' },
+  { id: 'isla_laguna_espejo', name: 'Mirror Lagoon', order: 4, requiredPebbles: 10, unlockedContentId: 'laguna_story' },
+  { id: 'isla_glaciar_eterno', name: 'Eternal Glacier', order: 5, requiredPebbles: 15, unlockedContentId: 'final_story' },
 ]
 
 function getOrCreateUser(uid: string) {
   if (!_store.users[uid]) {
-    _store.users[uid] = { uid, displayName: 'Explorador', nestLevel: 'playa', totalPebbles: 0, unlockedIslandIds: ['isla_bahia_calma'] }
+    _store.users[uid] = { uid, displayName: 'Explorer', nestLevel: 'playa', totalPebbles: 0, unlockedIslandIds: ['isla_bahia_calma'] }
     _store.pebbles[uid] = []
   }
   return _store.users[uid]
@@ -164,8 +164,8 @@ export const mockApi = {
             award_pebble: isCorrect,
             pebble_color_category: categories[i % 3],
             pebble_feedback_text: isCorrect
-              ? '¡Lo logramos! Esa piedrita brilla mucho en nuestro nido. Aprendimos juntos a cuidar nuestra información.'
-              : 'Hmm, la próxima vez podríamos pensarlo un poco más antes de compartir. ¡Seguimos aprendiendo!',
+              ? 'We did it! That little pebble shines bright in our nest. We learned together how to take care of our information.'
+              : 'Hmm, next time we could think about it a bit more before sharing. We keep learning!',
             tone: isCorrect ? 'celebratory' : 'thoughtful',
           }
         })
@@ -188,7 +188,7 @@ export const mockApi = {
           category: ['privacidad', 'impulsividad', 'datos_sensibles'][i % 3],
           colorCode: ['#097dac', '#fd6e58', '#f9bc46'][i % 3],
           scenarioId: _.scenarioId,
-          feedback: '¡Bien hecho!',
+          feedback: 'Well done!',
         }))
         const unlocked = ISLANDS.filter(i => user.unlockedIslandIds.includes(i.id))
         const nextCandidate = ISLANDS.find(i => !user.unlockedIslandIds.includes(i.id))

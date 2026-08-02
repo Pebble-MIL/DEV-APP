@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import type { UserState, Scenario, HiddenClue } from '../types'
 import { api } from '../services/api'
 import PebbleDialog from '../components/PebbleDialog'
+import pebbleHandUp from '../assets/pebble_hand_up.png'
 
 interface ChecklistProps {
   user: UserState | null
@@ -20,9 +21,9 @@ interface Answer {
 }
 
 const CHOICES = [
-  { key: 'bien', label: 'Hiciste bien', icon: '👍', color: 'bg-primary-container border-primary' },
-  { key: 'mejor', label: 'Mejor edítalo antes', icon: '✏️', color: 'bg-tertiary-fixed-dim border-tertiary' },
-  { key: 'no_se', label: 'No sé, explícame', icon: '🤔', color: 'bg-surface-container-high border-outline' },
+  { key: 'bien', label: 'You did well', icon: '👍', color: 'bg-primary-container border-primary' },
+  { key: 'mejor', label: 'Better edit it first', icon: '✏️', color: 'bg-tertiary-fixed-dim border-tertiary' },
+  { key: 'no_se', label: "I don't know, explain", icon: '🤔', color: 'bg-surface-container-high border-outline' },
 ]
 
 export default function Checklist({ user, updateUser }: ChecklistProps) {
@@ -38,8 +39,8 @@ export default function Checklist({ user, updateUser }: ChecklistProps) {
   if (!state || !state.scenario) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <button onClick={() => navigate('/game')} className="tactile-btn bg-primary text-on-primary px-8 py-4 rounded-2xl">
-          Ir a jugar
+        <button onClick={() => navigate('/home')} className="tactile-btn bg-primary text-on-primary px-8 py-4 rounded-2xl">
+          Go home
         </button>
       </div>
     )
@@ -50,9 +51,9 @@ export default function Checklist({ user, updateUser }: ChecklistProps) {
 
   const generateQuestion = (clue: HiddenClue): string => {
     const templates = [
-      `Encontré que en la foto se ve algo importante. ${clue.explanation.split('.')[0]}. ¿Crees que hice bien en compartirlo así?`,
-      `Mira, descubrí una pista: ${clue.explanation.split('.')[0].toLowerCase()}. ¿Qué opinas, estuvo bien mostrar eso?`,
-      `¡Encontré algo! ${clue.explanation.split('.')[0]}. ¿Debería haberlo publicado así nomás?`,
+      `I found that something important is visible in the photo. ${clue.explanation.split('.')[0]}. Do you think it was right to share it like that?`,
+      `Look, I discovered a clue: ${clue.explanation.split('.')[0].toLowerCase()}. What do you think, was it okay to show that?`,
+      `I found something! ${clue.explanation.split('.')[0]}. Should I have just posted it like that?`,
     ]
     return templates[Math.floor(Math.random() * templates.length)]
   }
@@ -82,7 +83,7 @@ export default function Checklist({ user, updateUser }: ChecklistProps) {
         setFeedback(
           foundClues.map(() => ({
             award_pebble: true,
-            feedback_text: '¡Bien pensado! Esa piedrita va directo al nido.',
+            feedback_text: 'Well thought! That pebble goes straight to the nest.',
             category: 'privacidad',
           }))
         )
@@ -99,7 +100,7 @@ export default function Checklist({ user, updateUser }: ChecklistProps) {
           {awarded > 0 ? '🎉' : '🤔'}
         </div>
         <h2 className="font-baloo text-display-lg-mobile text-primary">
-          {awarded > 0 ? `¡Conseguiste ${awarded} piedrita${awarded > 1 ? 's' : ''}!` : 'Sigamos aprendiendo'}
+          {awarded > 0 ? `You got ${awarded} pebble${awarded > 1 ? 's' : ''}!` : "Let's keep learning"}
         </h2>
 
         <div className="w-full space-y-4">
@@ -121,16 +122,16 @@ export default function Checklist({ user, updateUser }: ChecklistProps) {
 
         <div className="flex gap-4 mt-4">
           <button
-            onClick={() => navigate('/game')}
+            onClick={() => navigate('/home')}
             className="tactile-btn bg-primary text-on-primary font-bold py-4 px-10 rounded-2xl text-headline-md"
           >
-            Siguiente aventura
+            Go home
           </button>
           <button
             onClick={() => navigate('/nest')}
             className="tactile-btn bg-surface-container-high text-primary font-bold py-4 px-10 rounded-2xl border-2 border-primary text-headline-md"
           >
-            Ver nido
+            View nest
           </button>
         </div>
       </div>
@@ -141,8 +142,8 @@ export default function Checklist({ user, updateUser }: ChecklistProps) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="animate-spring-bounce text-6xl">🐧</div>
-          <p className="font-baloo text-headline-md text-primary">Pebble está pensando...</p>
+          <div className="animate-spring-bounce"><img src={pebbleHandUp} alt="Pebble" className="w-16 h-16 object-contain" /></div>
+          <p className="font-baloo text-headline-md text-primary">Pebble is thinking...</p>
         </div>
       </div>
     )
@@ -155,7 +156,7 @@ export default function Checklist({ user, updateUser }: ChecklistProps) {
       <div className="flex items-center justify-between mb-6">
         <span className="font-mono text-label-mono text-primary uppercase tracking-widest">Checklist</span>
         <span className="font-mono text-label-mono text-on-surface-variant">
-          {currentIdx + 1} de {totalQuestions}
+          {currentIdx + 1} of {totalQuestions}
         </span>
       </div>
 
@@ -169,7 +170,7 @@ export default function Checklist({ user, updateUser }: ChecklistProps) {
             {clue.category === 'privacidad' ? '🔒' : clue.category === 'impulsividad' ? '⚡' : '🔍'}
           </span>
           <span className="font-mono text-label-mono text-primary uppercase">
-            {clue.category === 'privacidad' ? 'Privacidad' : clue.category === 'impulsividad' ? 'Impulsividad' : 'Datos sensibles'}
+            {clue.category === 'privacidad' ? 'Privacy' : clue.category === 'impulsividad' ? 'Impulsivity' : 'Sensitive data'}
           </span>
         </div>
         <p className="text-body-md text-on-surface-variant">{clue.explanation}</p>

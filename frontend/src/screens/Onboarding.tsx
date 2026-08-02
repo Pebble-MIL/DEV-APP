@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { UserState } from '../types'
 import { api } from '../services/api'
+import pebbleHandUp from '../assets/pebble_hand_up.png'
 
 interface OnboardingProps {
   user: UserState | null
@@ -12,31 +13,31 @@ const QUIZ = [
   {
     id: 'q1',
     category: 'privacidad',
-    prompt: '¡Encontré una roca brillante frente a mi cueva! Quiero mostrarla a todos mis amigos pingüinos. ¿Le tomo la foto donde se vea mi cueva también?',
+    prompt: 'I found a shiny rock in front of my cave! I want to show it to all my penguin friends. Should I take the photo so my cave is visible too?',
     options: [
-      { key: 'A', text: '¡Sí! Así todos ven dónde vives', points: 0 },
-      { key: 'B', text: 'Mejor solo la roca, tu cueva es tuya', points: 2 },
-      { key: 'C', text: 'No sé, ¿importa?', points: 1 },
+      { key: 'A', text: 'Yes! So everyone can see where you live', points: 0 },
+      { key: 'B', text: 'Better just the rock, your cave is yours', points: 2 },
+      { key: 'C', text: 'I don\'t know, does it matter?', points: 1 },
     ],
   },
   {
     id: 'q2',
     category: 'impulsividad',
-    prompt: '¡Estoy MUY enojado! Otro pingüino me quitó mi pescado. Quiero contárselo a TODA la colonia ahora mismo. ¿Qué hago?',
+    prompt: 'I\'m VERY angry! Another penguin took my fish. I want to tell the ENTIRE colony right now. What should I do?',
     options: [
-      { key: 'A', text: 'Cuéntalo ya, que todos sepan', points: 0 },
-      { key: 'B', text: 'Respira primero, y después decides si lo cuentas', points: 2 },
-      { key: 'C', text: 'Cuéntaselo solo a tu mejor amigo', points: 1 },
+      { key: 'A', text: 'Tell everyone now, let them all know', points: 0 },
+      { key: 'B', text: 'Breathe first, then decide if you tell it', points: 2 },
+      { key: 'C', text: 'Only tell your best friend', points: 1 },
     ],
   },
   {
     id: 'q3',
     category: 'datos_sensibles',
-    prompt: 'Un pingüino que no conozco me preguntó cómo me llamo, dónde queda mi nido y a qué hora salgo a nadar. ¡Qué amigable! ¿Le respondo todo?',
+    prompt: 'A penguin I don\'t know asked me my name, where my nest is, and what time I go swimming. How friendly! Should I answer everything?',
     options: [
-      { key: 'A', text: 'Sí, es de buena educación responder', points: 0 },
-      { key: 'B', text: 'Puedes decirle tu nombre de juego, pero lo demás no', points: 2 },
-      { key: 'C', text: 'Respóndele solo dónde nadas', points: 0 },
+      { key: 'A', text: 'Yes, it\'s good manners to respond', points: 0 },
+      { key: 'B', text: 'You can tell them your game name, but nothing else', points: 2 },
+      { key: 'C', text: 'Only tell them where you swim', points: 0 },
     ],
   },
 ]
@@ -44,31 +45,42 @@ const QUIZ = [
 const LEVEL_INFO: Record<string, { emoji: string; title: string; desc: string; color: string }> = {
   playa: {
     emoji: '🏖️',
-    title: 'Nido de Playa',
-    desc: 'Estás empezando tu aventura. Las piedritas serán grandes y fáciles de encontrar. ¡Cada paso cuenta!',
+    title: 'Beach Nest',
+    desc: 'You are starting your adventure. The pebbles will be big and easy to find. Every step counts!',
     color: 'bg-tertiary-fixed-dim',
   },
   acantilado: {
     emoji: '⛰️',
-    title: 'Nido de Acantilado',
-    desc: 'Tienes buen ojo para las pistas. Los desafíos serán más interesantes. ¡Sigue así!',
+    title: 'Cliff Nest',
+    desc: 'You have a good eye for clues. The challenges will be more interesting. Keep it up!',
     color: 'bg-primary-container',
   },
   glaciar: {
     emoji: '🏔️',
-    title: 'Nido de Glaciar',
-    desc: 'Eres un guardián experto. Las pistas estarán bien escondidas. ¡Aceptas el reto?',
+    title: 'Glacier Nest',
+    desc: 'You are an expert guardian. The clues will be well hidden. Do you accept the challenge?',
     color: 'bg-primary-fixed-dim',
   },
 }
 
+type OnboardingStep = 'welcome' | 'name' | 'age' | 'password' | 'quiz' | 'result'
+
 export default function Onboarding({ user, updateUser }: OnboardingProps) {
   const navigate = useNavigate()
-  const [step, setStep] = useState<'welcome' | 'quiz' | 'result'>('welcome')
+  const [step, setStep] = useState<OnboardingStep>('welcome')
+  const [name, setName] = useState('')
+  const [age, setAge] = useState('')
+  const [password, setPassword] = useState('')
   const [currentQ, setCurrentQ] = useState(0)
   const [answers, setAnswers] = useState<Array<{ questionId: string; optionSelected: string }>>([])
   const [result, setResult] = useState<{ totalScore: number; nestLevel: string } | null>(null)
   const [submitting, setSubmitting] = useState(false)
+
+  const handleSaveProfile = () => {
+    if (!name.trim()) return
+    updateUser({ displayName: name.trim(), age: parseInt(age) || 0, password })
+    setStep('quiz')
+  }
 
   const handleAnswer = async (key: string) => {
     const newAnswers = [...answers, { questionId: QUIZ[currentQ].id, optionSelected: key }]
@@ -102,22 +114,119 @@ export default function Onboarding({ user, updateUser }: OnboardingProps) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-margin-mobile bg-background">
         <div className="text-center space-y-md max-w-lg animate-spring-in">
-          <div className="text-8xl mb-4">🐧</div>
+          <div className="mb-4"><img src={pebbleHandUp} alt="Pebble" className="w-64 h-64 object-contain mx-auto" /></div>
           <h1 className="font-baloo text-display-lg-mobile md:text-display-lg text-primary">
-            ¡Hola! Soy <span className="text-secondary">Pebble</span>
+            Hi! I'm <span className="text-secondary">Pebble</span>
           </h1>
           <p className="text-body-lg text-on-surface-variant">
-            Soy un pingüino joven y estoy aprendiendo a cuidar mi información en la colonia digital.
-            ¿Me ayudas a construir mi primer nido?
+            I'm a young penguin learning to protect my information in the digital colony.
+            Will you help me build my first nest?
           </p>
           <p className="text-body-md text-on-surface-variant font-semibold">
-            Primero, unas preguntas para saber qué tipo de nido necesitamos.
+            First, I need to get to know you a bit.
           </p>
           <button
-            onClick={() => setStep('quiz')}
+            onClick={() => setStep('name')}
             className="tactile-btn bg-primary text-on-primary font-bold py-4 px-12 rounded-2xl text-headline-md mt-6"
           >
-            ¡Vamos allá!
+            Let's go!
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (step === 'name') {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-margin-mobile bg-background">
+        <div className="text-center space-y-md max-w-lg animate-spring-in">
+          <div className="mb-4"><img src={pebbleHandUp} alt="Pebble" className="w-48 h-48 object-contain mx-auto" /></div>
+          <PebbleMessage text="What's your name? That way I can call you by name during our adventure." />
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your name..."
+            className="w-full px-6 py-4 rounded-2xl border-4 border-outline-variant bg-white text-headline-md font-bold text-deep-ink outline-none focus:border-primary transition-colors text-center"
+            autoFocus
+            maxLength={30}
+          />
+          <button
+            onClick={() => name.trim() && setStep('age')}
+            disabled={!name.trim()}
+            className={`tactile-btn font-bold py-4 px-12 rounded-2xl text-headline-md mt-4 ${
+              name.trim() ? 'bg-primary text-on-primary' : 'bg-surface-variant text-on-surface-variant cursor-not-allowed'
+            }`}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (step === 'age') {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-margin-mobile bg-background">
+        <div className="text-center space-y-md max-w-lg animate-spring-in">
+          <div className="mb-4"><img src={pebbleHandUp} alt="Pebble" className="w-48 h-48 object-contain mx-auto" /></div>
+          <PebbleMessage text="How old are you? So I can pick adventures suitable for you." />
+          <input
+            type="number"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            placeholder="Your age..."
+            className="w-full px-6 py-4 rounded-2xl border-4 border-outline-variant bg-white text-headline-md font-bold text-deep-ink outline-none focus:border-primary transition-colors text-center"
+            autoFocus
+            min={3}
+            max={18}
+          />
+          <button
+            onClick={() => age && setStep('password')}
+            disabled={!age}
+            className={`tactile-btn font-bold py-4 px-12 rounded-2xl text-headline-md mt-4 ${
+              age ? 'bg-primary text-on-primary' : 'bg-surface-variant text-on-surface-variant cursor-not-allowed'
+            }`}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (step === 'password') {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-margin-mobile bg-background">
+        <div className="text-center space-y-md max-w-lg animate-spring-in">
+          <div className="mb-4"><img src={pebbleHandUp} alt="Pebble" className="w-48 h-48 object-contain mx-auto" /></div>
+          <PebbleMessage text="Create a password to protect your account. That way only you can access your nest." />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Your secret password..."
+            className="w-full px-6 py-4 rounded-2xl border-4 border-outline-variant bg-white text-headline-md font-bold text-deep-ink outline-none focus:border-primary transition-colors text-center"
+            autoFocus
+            minLength={3}
+            maxLength={30}
+          />
+          {password.length > 0 && password.length < 3 && (
+            <p className="text-xs text-on-surface-variant">Password must be at least 3 characters</p>
+          )}
+          <div className="bg-surface-container-low rounded-2xl p-4 border-2 border-outline-variant">
+            <p className="font-mono text-label-mono text-on-surface-variant uppercase text-xs">
+              ⚠️ Remember your password. You'll need it to come back to your account.
+            </p>
+          </div>
+          <button
+            onClick={handleSaveProfile}
+            disabled={password.length < 3}
+            className={`tactile-btn font-bold py-4 px-12 rounded-2xl text-headline-md mt-4 ${
+              password.length >= 3 ? 'bg-primary text-on-primary' : 'bg-surface-variant text-on-surface-variant cursor-not-allowed'
+            }`}
+          >
+            Done!
           </button>
         </div>
       </div>
@@ -131,9 +240,9 @@ export default function Onboarding({ user, updateUser }: OnboardingProps) {
         <div className="mt-8 mb-6">
           <div className="flex justify-between items-end mb-2">
             <span className="font-mono text-label-mono text-deep-ink uppercase tracking-widest">
-              {q.category === 'privacidad' ? 'Privacidad' : q.category === 'impulsividad' ? 'Pensar antes' : 'Datos sensibles'}
+              {q.category === 'privacidad' ? 'Privacy' : q.category === 'impulsividad' ? 'Think first' : 'Sensitive data'}
             </span>
-            <span className="font-mono text-label-mono text-primary font-black">{currentQ + 1} de {QUIZ.length}</span>
+            <span className="font-mono text-label-mono text-primary font-black">{currentQ + 1} of {QUIZ.length}</span>
           </div>
           <div className="h-3 w-full bg-surface-variant rounded-full border-2 border-outline-variant p-0.5 overflow-hidden">
             <div className="h-full bg-primary rounded-full transition-all duration-500 ease-out" style={{ width: `${((currentQ) / QUIZ.length) * 100}%` }} />
@@ -180,14 +289,14 @@ export default function Onboarding({ user, updateUser }: OnboardingProps) {
           </div>
           <p className="text-body-lg text-on-surface-variant mt-4">{level.desc}</p>
           <div className="bg-surface-container-low rounded-2xl p-4 mt-4">
-            <p className="font-mono text-label-mono text-on-surface-variant uppercase">Puntaje</p>
+            <p className="font-mono text-label-mono text-on-surface-variant uppercase">Score</p>
             <p className="font-baloo text-display-lg-mobile text-primary">{result.totalScore}/6</p>
           </div>
           <button
             onClick={() => navigate('/tutorial')}
             className="tactile-btn bg-primary text-on-primary font-bold py-4 px-12 rounded-2xl text-headline-md mt-6"
           >
-            ¡Hacer el Tutorial!
+            Take the Tutorial!
           </button>
         </div>
       </div>
@@ -195,4 +304,12 @@ export default function Onboarding({ user, updateUser }: OnboardingProps) {
   }
 
   return null
+}
+
+function PebbleMessage({ text }: { text: string }) {
+  return (
+    <div className="dialog-bubble mb-2">
+      <p className="font-baloo text-headline-md text-deep-ink leading-tight">{text}</p>
+    </div>
+  )
 }

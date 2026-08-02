@@ -14,7 +14,7 @@ export default function Playa03Scene({ foundClues, onClueFound }: SceneProps) {
 
       {/* Photo frame */}
       <rect x="80" y="80" width="440" height="240" rx="10" fill="#f7f9ff" stroke="#d4e4f8" strokeWidth="2" />
-      <text x="300" y="110" textAnchor="middle" fill="#3f484f" fontSize="12" fontFamily="monospace">📸 Selfie del día</text>
+      <text x="300" y="110" textAnchor="middle" fill="#3f484f" fontSize="12" fontFamily="monospace">📸 Selfie of the day</text>
 
       {/* Selfie person (simplified Pebble taking selfie) */}
       <circle cx="260" cy="200" r="35" fill="#097dac" />
@@ -39,7 +39,7 @@ export default function Playa03Scene({ foundClues, onClueFound }: SceneProps) {
           <rect x="380" y="110" width="120" height="50" rx="5" fill="#d4e4f8" stroke="#006389" strokeWidth="2" />
           <text x="440" y="128" textAnchor="middle" fill="#006389" fontSize="9" fontFamily="monospace" fontWeight="bold">ESCUELA</text>
           <text x="440" y="142" textAnchor="middle" fill="#006389" fontSize="9" fontFamily="monospace" fontWeight="bold">GLACIAR NORTE</text>
-          <text x="440" y="155" textAnchor="middle" fill="#006389" fontSize="7" fontFamily="monospace">¡Bienvenidos!</text>
+          <text x="440" y="155" textAnchor="middle" fill="#006389" fontSize="7" fontFamily="monospace">Welcome!</text>
           {/* Highlight pulse */}
           <rect x="380" y="110" width="120" height="50" rx="5" fill="none" stroke="#fd6e58" strokeWidth="2" strokeDasharray="5,3" opacity="0.8">
             <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.5s" repeatCount="indefinite" />
@@ -50,7 +50,7 @@ export default function Playa03Scene({ foundClues, onClueFound }: SceneProps) {
           <rect x="380" y="110" width="120" height="50" rx="5" fill="#fd6e58" stroke="#ac3323" strokeWidth="2" />
           <text x="440" y="128" textAnchor="middle" fill="white" fontSize="9" fontFamily="monospace" fontWeight="bold">ESCUELA</text>
           <text x="440" y="142" textAnchor="middle" fill="white" fontSize="9" fontFamily="monospace" fontWeight="bold">GLACIAR NORTE</text>
-          <text x="440" y="155" textAnchor="middle" fill="white" fontSize="7">🏫 visible!</text>
+          <text x="440" y="155" textAnchor="middle" fill="white" fontSize="7">🏫 School visible!</text>
         </g>
       )}
 
@@ -58,7 +58,7 @@ export default function Playa03Scene({ foundClues, onClueFound }: SceneProps) {
       {found && (
         <g>
           <rect x="150" y="320" width="300" height="35" rx="17" fill="#097dac" opacity="0.95" />
-          <text x="300" y="342" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">🔍 El nombre de la escuela se ve en la foto!</text>
+          <text x="300" y="342" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">🔍 The school name is visible in the photo!</text>
         </g>
       )}
     </svg>

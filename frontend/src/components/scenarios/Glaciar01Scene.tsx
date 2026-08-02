@@ -22,11 +22,11 @@ export default function Glaciar01Scene({ foundClues, onClueFound }: SceneProps) 
 
       {/* Photo collage frame */}
       <rect x="40" y="40" width="520" height="280" rx="12" fill="white" stroke="#bfc8d0" strokeWidth="2" />
-      <text x="300" y="65" textAnchor="middle" fill="#3f484f" fontSize="11" fontFamily="monospace">📸 Álbum: Excursión al Glaciar</text>
+      <text x="300" y="65" textAnchor="middle" fill="#3f484f" fontSize="11" fontFamily="monospace">📸 Album: Glacier Trip</text>
 
       {/* Photo 1 */}
       <rect x="60" y="80" width="220" height="150" rx="8" fill="#e3efff" stroke="#bfc8d0" strokeWidth="1" />
-      <text x="170" y="120" textAnchor="middle" fill="#3f484f" fontSize="9">Grupo en el hielo</text>
+      <text x="170" y="120" textAnchor="middle" fill="#3f484f" fontSize="9">Group on the ice</text>
       {/* Small figures in photo */}
       <circle cx="140" cy="160" r="8" fill="#097dac" />
       <circle cx="170" cy="155" r="8" fill="#097dac" />
@@ -54,7 +54,7 @@ export default function Glaciar01Scene({ foundClues, onClueFound }: SceneProps) 
 
       {/* Photo 2 */}
       <rect x="310" y="80" width="220" height="150" rx="8" fill="#e3efff" stroke="#bfc8d0" strokeWidth="1" />
-      <text x="420" y="120" textAnchor="middle" fill="#3f484f" fontSize="9">Paisaje glacial</text>
+      <text x="420" y="120" textAnchor="middle" fill="#3f484f" fontSize="9">Glacial landscape</text>
       {/* Mountains */}
       <polygon points="320,200 360,120 400,200" fill="#82cfff" opacity="0.5" />
       <polygon points="380,200 430,100 480,200" fill="#82cfff" opacity="0.7" />
@@ -73,16 +73,16 @@ export default function Glaciar01Scene({ foundClues, onClueFound }: SceneProps) 
       ) : (
         <g>
           <rect x="430" y="190" width="90" height="35" rx="4" fill="#fd6e58" stroke="#ac3323" strokeWidth="2" opacity="0.9" />
-          <text x="475" y="212" textAnchor="middle" fill="white" fontSize="10">🚫 Ubicación</text>
+          <text x="475" y="212" textAnchor="middle" fill="white" fontSize="10">🚫 Location</text>
         </g>
       )}
 
       {/* Found badges */}
       {found1 && (
-        <text x="85" y="250" textAnchor="middle" fill="#097dac" fontSize="9" fontWeight="bold">⌚ Logo del club!</text>
+        <text x="85" y="250" textAnchor="middle" fill="#097dac" fontSize="9" fontWeight="bold">⌚ Club logo!</text>
       )}
       {found2 && (
-        <text x="475" y="245" textAnchor="middle" fill="#097dac" fontSize="9" fontWeight="bold">📍 Ubicación exacta!</text>
+        <text x="475" y="245" textAnchor="middle" fill="#097dac" fontSize="9" fontWeight="bold">📍 Exact location!</text>
       )}
     </svg>
   )
