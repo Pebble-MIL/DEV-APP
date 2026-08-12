@@ -20,7 +20,7 @@ async def get_nest(uid: str, request: Request):
         if hasattr(p, 'to_dict'):
             pebbles.append(p.to_dict())
 
-    unlocked_ids = user_data.get("unlockedIslandIds", [])
+    unlocked_ids = set(user_data.get("unlockedIslandIds", []))
     unlocked = [i for i in ISLANDS if i["id"] in unlocked_ids]
     total = user_data.get("totalPebbles", 0)
 
