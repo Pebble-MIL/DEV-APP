@@ -1,6 +1,16 @@
 let firebaseApp: any = null
 let firebaseAuthModule: any = null
 
+let inMemoryToken: string | null = null
+
+export function setToken(token: string | null) {
+  inMemoryToken = token
+}
+
+export function getToken(): string | null {
+  return inMemoryToken
+}
+
 export async function initFirebaseAuth(): Promise<{ app: any; auth: any }> {
   if (firebaseApp) return { app: firebaseApp, auth: firebaseAuthModule }
   try {
@@ -26,17 +36,17 @@ export async function initFirebaseAuth(): Promise<{ app: any; auth: any }> {
 export async function loginAnonymously(): Promise<string> {
   const { auth } = await initFirebaseAuth()
   if (auth?._isDev) {
-    localStorage.setItem('pebble_id_token', 'dev-token')
+    setToken('dev-token')
     return 'dev-token'
   }
   try {
     const authMod = await import('firebase/auth')
     const cred = await authMod.signInAnonymously(auth)
     const token = await cred.user.getIdToken()
-    localStorage.setItem('pebble_id_token', token)
+    setToken(token)
     return token
   } catch {
-    localStorage.setItem('pebble_id_token', 'dev-token')
+    setToken('dev-token')
     return 'dev-token'
   }
 }

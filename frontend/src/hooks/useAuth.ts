@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { onAuthChange, loginAnonymously, initFirebaseAuth } from '../services/auth'
+import { onAuthChange, loginAnonymously, initFirebaseAuth, setToken } from '../services/auth'
 import { api } from '../services/api'
 import type { UserState } from '../types'
 
@@ -69,7 +69,7 @@ export function useAuth() {
           if (!mounted) return
           if (fbUser) {
             const token = await fbUser.getIdToken()
-            localStorage.setItem('pebble_id_token', token)
+            setToken(token)
             try { await api.verifyToken(token) } catch {}
             const u = { ...DEFAULT_USER, uid: fbUser.uid }
             setUser(u)
@@ -117,7 +117,7 @@ export function useAuth() {
   const logout = () => {
     clearSavedUser()
     setUser(null)
-    try { localStorage.removeItem('pebble_id_token') } catch {}
+    setToken(null)
   }
 
   return { user, loading, login, updateUser, logout }

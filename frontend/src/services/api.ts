@@ -1,10 +1,11 @@
 import { mockApi } from './mockApi'
+import { getToken } from './auth'
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK !== 'false'
 const BASE_URL = '/api'
 
 async function tryRealBackend(path: string, options: RequestInit = {}) {
-  const token = localStorage.getItem('pebble_id_token')
+  const token = getToken()
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     ...(options.headers as Record<string, string>),
