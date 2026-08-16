@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { UserState } from '../types'
-import { api } from '../services/api'
 import PebbleDialog from '../components/PebbleDialog'
 
 interface TutorialProps {
