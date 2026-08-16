@@ -130,8 +130,8 @@ export const mockApi = {
       if (pathname === '/scenarios/next' && method === 'GET') {
         const uid = 'dev-user'
         const user = getOrCreateUser(uid)
-        const completedIds = (_store.pebbles[uid] || []).map((p: any) => p.scenarioId)
-        const available = SCENARIOS.filter(s => s.nestLevelTarget === user.nestLevel && s.id !== 'tutorial_01' && !completedIds.includes(s.id))
+        const completedIds = new Set((_store.pebbles[uid] || []).map((p: any) => p.scenarioId))
+        const available = SCENARIOS.filter(s => s.nestLevelTarget === user.nestLevel && s.id !== 'tutorial_01' && !completedIds.has(s.id))
         if (available.length === 0) return { message: 'No more scenarios!', done: true }
         const scenario = { ...available[0] }
         return scenario
