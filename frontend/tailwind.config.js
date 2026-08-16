@@ -89,8 +89,8 @@ export default {
       animation: {
         'spring-in': 'springIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
         'spring-bounce': 'springBounce 2s infinite ease-in-out',
-        'float': 'float 3s ease-in-out infinite',
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         springIn: {
@@ -103,7 +103,7 @@ export default {
         },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
+          '50%': { transform: 'translateY(-20px)' },
         },
       },
     },
