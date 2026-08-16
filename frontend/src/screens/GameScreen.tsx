@@ -65,21 +65,7 @@ export default function GameScreen({ user, updateUser }: GameScreenProps) {
     setTimeout(() => setFeedback(null), 3000)
   }
 
-  const handleContinue = () => {
-    if (!scenario) return
-    navigate('/checklist', {
-      state: {
-        scenario,
-        foundClues: foundClues.map((f) => ({
-          clueId: f.clueId,
-          category: f.category,
-          explanation: f.explanation,
-        })),
-      },
-    })
-  }
-
-  const handleSkip = () => {
+  const handleFinishScenario = () => {
     if (!scenario) return
     navigate('/checklist', {
       state: {
@@ -188,13 +174,13 @@ export default function GameScreen({ user, updateUser }: GameScreenProps) {
           </div>
         )}
         <button
-          onClick={handleContinue}
+          onClick={handleFinishScenario}
           className="tactile-btn w-full bg-primary text-on-primary font-bold py-4 px-8 rounded-2xl text-headline-md"
         >
           {allFound ? 'Review decisions' : 'Continue to checklist'}
         </button>
         <button
-          onClick={handleSkip}
+          onClick={handleFinishScenario}
           className="w-full text-on-surface-variant font-mono text-sm py-2 hover:text-primary transition-colors"
         >
           Skip search (go to checklist)
