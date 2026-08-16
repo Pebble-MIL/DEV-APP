@@ -3,12 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, quiz, scenarios, checklist, nest, islands, tutorial
 from app.middleware.auth_middleware import FirebaseAuthMiddleware
 from app.services.firebase import init_firebase
+from app.config import ALLOWED_ORIGINS
 
 app = FastAPI(title="Pebble API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
