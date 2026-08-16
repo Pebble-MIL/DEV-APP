@@ -69,7 +69,10 @@ class DevCollection:
             _dev_stores[name] = {}
         self._docs = _dev_stores[name]
 
-    def document(self, doc_id: str):
+    def document(self, doc_id: str = None):
+        if doc_id is None:
+            import uuid
+            doc_id = str(uuid.uuid4())
         return DevDocument(doc_id, self)
 
     def where(self, field: str, op: str, value):
@@ -139,3 +142,34 @@ class DevQuery:
             elif self._op == "not-in" and val not in self._value:
                 results.append(DevSnapshot(doc_id, data))
         return results
+
+def get_batch():
+    if db is None:
+        return DevBatch()
+    return db.batch()
+
+class DevBatch:
+    def __init__(self):
+        self._ops = []
+
+    def set(self, ref, data):
+        self._ops.append((ref, data))
+
+    def update(self, ref, data):
+        self._ops.append((ref, data, 'update'))
+
+    def delete(self, ref):
+        self._ops.append((ref, 'delete'))
+
+    def commit(self):
+        for op in self._ops:
+            if len(op) == 2:
+                ref, data = op
+                if data == 'delete':
+                    pass # Delete not supported in dev mode easily right now
+                else:
+                    ref.set(data)
+            elif len(op) == 3:
+                ref, data, _ = op
+                ref.update(data)
+        self._ops = []
