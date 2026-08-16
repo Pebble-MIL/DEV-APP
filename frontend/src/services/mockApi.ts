@@ -190,8 +190,9 @@ export const mockApi = {
           scenarioId: _.scenarioId,
           feedback: 'Well done!',
         }))
-        const unlocked = ISLANDS.filter(i => user.unlockedIslandIds.includes(i.id))
-        const nextCandidate = ISLANDS.find(i => !user.unlockedIslandIds.includes(i.id))
+        const unlockedSet = new Set(user.unlockedIslandIds)
+        const unlocked = ISLANDS.filter(i => unlockedSet.has(i.id))
+        const nextCandidate = ISLANDS.find(i => !unlockedSet.has(i.id))
         const nextIsland = nextCandidate ? { ...nextCandidate, progress: Math.min(100, Math.floor((user.totalPebbles / Math.max(1, nextCandidate.requiredPebbles)) * 100)) } : null
         return { pebbles, totalPebbles: user.totalPebbles, nestLevel: user.nestLevel, unlockedIslands: unlocked, nextIsland }
       }
