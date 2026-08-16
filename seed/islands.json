@@ -33,5 +33,40 @@
     "order": 5,
     "requiredPebbles": 15,
     "unlockedContentId": "final_story"
+  },
+  {
+    "id": "isla_aurora_polar",
+    "name": "Aurora Polar",
+    "order": 6,
+    "requiredPebbles": 20,
+    "unlockedContentId": "aurora_story"
+  },
+  {
+    "id": "isla_cueva_cristal",
+    "name": "Cueva de Cristal",
+    "order": 7,
+    "requiredPebbles": 25,
+    "unlockedContentId": "cristal_story"
+  },
+  {
+    "id": "isla_mar_estrellas",
+    "name": "Mar de Estrellas",
+    "order": 8,
+    "requiredPebbles": 30,
+    "unlockedContentId": "estrellas_story"
+  },
+  {
+    "id": "isla_valle_nieve",
+    "name": "Valle de Nieve",
+    "order": 9,
+    "requiredPebbles": 35,
+    "unlockedContentId": "nieve_story"
+  },
+  {
+    "id": "isla_pico_helado",
+    "name": "Pico Helado",
+    "order": 10,
+    "requiredPebbles": 40,
+    "unlockedContentId": "helado_story"
   }
 ]
