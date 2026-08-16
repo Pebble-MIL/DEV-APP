@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import type { UserState, NestState, Island } from '../types'
 import { api } from '../services/api'
 import pebbleHandUp from '../assets/pebble_hand_up.png'
+import Header from '../components/Header'
 
 interface HomeScreenProps {
   user: UserState | null
@@ -44,20 +45,7 @@ export default function HomeScreen({ user, onLogout }: HomeScreenProps) {
   return (
     <div className="min-h-screen bg-background pb-32">
       {/* Header */}
-      <header className="bg-surface border-b-4 border-surface-variant sticky top-0 z-50">
-        <div className="flex justify-between items-center w-full px-5 py-4 max-w-7xl mx-auto">
-          <div className="font-bold text-headline-md text-primary tracking-tighter">Pebble</div>
-          <div className="flex items-center gap-3">
-            <button className="text-on-surface-variant hover:text-primary transition-colors" title="Settings" aria-label="Settings">
-              <span className="material-symbols-outlined" aria-hidden="true">settings</span>
-            </button>
-            <button onClick={onLogout} className="text-on-surface-variant hover:text-primary transition-colors" title="Log out" aria-label="Log out">
-              <span className="material-symbols-outlined" aria-hidden="true">logout</span>
-            </button>
-            <div className="font-mono text-label-mono text-primary">{pebbles} 🪨</div>
-          </div>
-        </div>
-      </header>
+      <Header onLogout={onLogout} pebbles={pebbles} />
 
       <main className="max-w-2xl mx-auto p-5 space-y-6">
         {/* Welcome card */}

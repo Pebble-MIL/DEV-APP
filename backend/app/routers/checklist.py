@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, HTTPException
 from app.models.schemas import ChecklistEvaluation
-from app.services.firebase import get_collection
+from app.services.firebase import get_collection, get_batch
 from app.services.ai_pebble import evaluate_checklist
 from app.seed_data import SCENARIOS
 
@@ -19,9 +19,12 @@ async def evaluate(body: ChecklistEvaluation, request: Request):
     result = await evaluate_checklist(body.scenarioId, answers_dicts, body.foundClueIds)
 
     users_ref = get_collection("users")
-    pebbles_ref = users_ref.document(uid).collection("pebbles")
+    user_doc_ref = users_ref.document(uid)
+    pebbles_ref = user_doc_ref.collection("pebbles")
 
+    batch = get_batch()
     awarded = []
+
     for i, ev in enumerate(result.get("evaluations", [])):
         if ev.get("award_pebble"):
             clue_id = body.foundClueIds[i] if i < len(body.foundClueIds) else f"clue_{i}"
@@ -35,12 +38,15 @@ async def evaluate(body: ChecklistEvaluation, request: Request):
                 "feedback": ev.get("pebble_feedback_text", ""),
                 "clueId": clue_id,
             }
-            pebbles_ref.add(pebble_data)
+            new_pebble_ref = pebbles_ref.document()
+            batch.set(new_pebble_ref, pebble_data)
             awarded.append(pebble_data)
 
-    user_doc = users_ref.document(uid).get()
+    user_doc = user_doc_ref.get()
     current_total = user_doc.to_dict().get("totalPebbles", 0) if user_doc and user_doc.exists else 0
-    users_ref.document(uid).update({"totalPebbles": current_total + len(awarded)})
+    batch.update(user_doc_ref, {"totalPebbles": current_total + len(awarded)})
+
+    batch.commit()
 
     return {
         "evaluations": result.get("evaluations", []),
