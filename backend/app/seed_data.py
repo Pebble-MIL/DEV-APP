@@ -212,6 +212,12 @@ SCENARIOS = [
         ],
         "difficulty": 3,
     },
+    {"id": "playa_04", "type": "photo", "nestLevelTarget": "playa", "mediaUrl": "", "promptText": "¡Hice un castillo de hielo increíble! ¿Lo comparto?", "hiddenClues": [{"clueId": "playa_04_clue_1", "category": "privacidad", "coordinates": {"x": 100, "y": 100, "radius": 40}, "explanation": "Hay un paquete con la dirección de mi nido detrás del castillo."}], "difficulty": 1},
+    {"id": "playa_05", "type": "message", "nestLevelTarget": "playa", "mediaUrl": "", "promptText": "Un pingüino dice que regala pescados si le doy la clave de mi nido. ¿Se la doy?", "hiddenClues": [{"clueId": "playa_05_clue_1", "category": "datos_sensibles", "textSpan": {"start": 40, "end": 58}, "explanation": "Nunca debemos dar la clave o contraseña de nuestro nido a extraños."}], "difficulty": 1},
+    {"id": "acantilado_04", "type": "photo", "nestLevelTarget": "acantilado", "mediaUrl": "", "promptText": "¡Miren qué vista desde el acantilado! Salimos genial.", "hiddenClues": [{"clueId": "acantilado_04_clue_1", "category": "privacidad", "coordinates": {"x": 200, "y": 150, "radius": 40}, "explanation": "En el fondo se ve claramente la entrada secreta al club de amigos."}, {"clueId": "acantilado_04_clue_2", "category": "datos_sensibles", "coordinates": {"x": 300, "y": 50, "radius": 30}, "explanation": "Uno de mis amigos tiene puesto un collar con su nombre completo."}], "difficulty": 2},
+    {"id": "acantilado_05", "type": "message", "nestLevelTarget": "acantilado", "mediaUrl": "", "promptText": "¡Acabo de romper la regla de no ir a la cueva de hielo sola! Fue muy divertido, ¿lo cuento?", "hiddenClues": [{"clueId": "acantilado_05_clue_1", "category": "impulsividad", "textSpan": {"start": 0, "end": 45}, "explanation": "Contar en línea que rompiste una regla de seguridad te puede meter en problemas."}], "difficulty": 2},
+    {"id": "glaciar_04", "type": "photo", "nestLevelTarget": "glaciar", "mediaUrl": "", "promptText": "Me encanta mi nuevo carnet de explorador. ¡Se lo voy a mostrar a todos!", "hiddenClues": [{"clueId": "glaciar_04_clue_1", "category": "datos_sensibles", "coordinates": {"x": 250, "y": 250, "radius": 50}, "explanation": "El carnet muestra mi número de identificación de explorador y fecha de nacimiento."}, {"clueId": "glaciar_04_clue_2", "category": "privacidad", "coordinates": {"x": 150, "y": 300, "radius": 40}, "explanation": "En la foto del carnet también se ve el sello oficial que no debe compartirse."}], "difficulty": 3},
+    {"id": "glaciar_05", "type": "message", "nestLevelTarget": "glaciar", "mediaUrl": "", "promptText": "Me enviaron un enlace diciendo que gané un viaje al polo norte si doy mi dirección. ¡Qué emoción!", "hiddenClues": [{"clueId": "glaciar_05_clue_1", "category": "impulsividad", "textSpan": {"start": 0, "end": 35}, "explanation": "Hacer clic en enlaces de supuestos premios es muy peligroso."}, {"clueId": "glaciar_05_clue_2", "category": "datos_sensibles", "textSpan": {"start": 60, "end": 75}, "explanation": "Nunca debemos dar nuestra dirección a extraños, incluso si prometen premios."}], "difficulty": 3}
 ]
 
 ISLANDS = [
@@ -220,4 +226,9 @@ ISLANDS = [
     {"id": "isla_cima_viento", "name": "Cima del Viento", "order": 3, "requiredPebbles": 6, "unlockedContentId": "cima_story"},
     {"id": "isla_laguna_espejo", "name": "Laguna Espejo", "order": 4, "requiredPebbles": 10, "unlockedContentId": "laguna_story"},
     {"id": "isla_glaciar_eterno", "name": "Glaciar Eterno", "order": 5, "requiredPebbles": 15, "unlockedContentId": "final_story"},
+    {"id": "isla_aurora_polar", "name": "Aurora Polar", "order": 6, "requiredPebbles": 20, "unlockedContentId": "aurora_story"},
+    {"id": "isla_cueva_cristal", "name": "Cueva de Cristal", "order": 7, "requiredPebbles": 25, "unlockedContentId": "cristal_story"},
+    {"id": "isla_mar_estrellas", "name": "Mar de Estrellas", "order": 8, "requiredPebbles": 30, "unlockedContentId": "estrellas_story"},
+    {"id": "isla_valle_nieve", "name": "Valle de Nieve", "order": 9, "requiredPebbles": 35, "unlockedContentId": "nieve_story"},
+    {"id": "isla_pico_helado", "name": "Pico Helado", "order": 10, "requiredPebbles": 40, "unlockedContentId": "helado_story"}
 ]
