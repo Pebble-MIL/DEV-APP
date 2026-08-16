@@ -68,8 +68,8 @@ export default function Tutorial({ user, updateUser }: TutorialProps) {
   return (
     <div className="min-h-screen flex flex-col px-margin-mobile py-4 max-w-2xl mx-auto pb-32">
       <div className="flex items-center gap-3 mb-4">
-        <button onClick={() => navigate('/home')} className="text-on-surface-variant hover:text-primary">
-          <span className="material-symbols-outlined">close</span>
+        <button onClick={() => navigate('/home')} className="text-on-surface-variant hover:text-primary" aria-label="Close tutorial">
+          <span className="material-symbols-outlined" aria-hidden="true">close</span>
         </button>
         <div className="flex-1 h-2 bg-surface-variant rounded-full overflow-hidden">
           <div className="h-full bg-primary rounded-full transition-all duration-500" style={{ width: `${((step + 1) / STEPS.length) * 100}%` }} />
