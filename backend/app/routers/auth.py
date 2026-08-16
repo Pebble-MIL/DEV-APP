@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request
-from app.models.schemas import FirebaseToken, UserResponse
-from app.services.firebase import verify_token, get_collection
+
+from app.models.schemas import FirebaseToken
+from app.services.firebase import get_collection, verify_token
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
