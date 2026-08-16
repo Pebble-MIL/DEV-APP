@@ -9,7 +9,11 @@
       {
         "clueId": "playa_01_clue_1",
         "category": "privacidad",
-        "coordinates": { "x": 150, "y": 180, "radius": 35 },
+        "coordinates": {
+          "x": 150,
+          "y": 180,
+          "radius": 35
+        },
         "explanation": "¡Oh! Ahí está mi cueva de fondo. Si la foto muestra dónde vivo, cualquier pingüino podría venir. ¿Mejor no mostrarla, verdad?"
       }
     ],
@@ -25,7 +29,10 @@
       {
         "clueId": "playa_02_clue_1",
         "category": "datos_sensibles",
-        "textSpan": { "start": 10, "end": 35 },
+        "textSpan": {
+          "start": 10,
+          "end": 35
+        },
         "explanation": "¡Espera! No conocemos bien a ese pingüino. Decirle nuestro nombre completo a un desconocido no es buena idea."
       }
     ],
@@ -41,7 +48,11 @@
       {
         "clueId": "playa_03_clue_1",
         "category": "privacidad",
-        "coordinates": { "x": 300, "y": 100, "radius": 30 },
+        "coordinates": {
+          "x": 300,
+          "y": 100,
+          "radius": 30
+        },
         "explanation": "¡Veo el nombre de mi escuela en el fondo! Eso también es información privada."
       }
     ],
@@ -57,13 +68,21 @@
       {
         "clueId": "acantilado_01_clue_1",
         "category": "datos_sensibles",
-        "coordinates": { "x": 100, "y": 250, "radius": 35 },
+        "coordinates": {
+          "x": 100,
+          "y": 250,
+          "radius": 35
+        },
         "explanation": "El uniforme tiene el nombre de mi equipo y escuela."
       },
       {
         "clueId": "acantilado_01_clue_2",
         "category": "privacidad",
-        "coordinates": { "x": 350, "y": 50, "radius": 25 },
+        "coordinates": {
+          "x": 350,
+          "y": 50,
+          "radius": 25
+        },
         "explanation": "El reflejo en el hielo muestra mi casa."
       }
     ],
@@ -79,13 +98,19 @@
       {
         "clueId": "acantilado_02_clue_1",
         "category": "impulsividad",
-        "textSpan": { "start": 0, "end": 18 },
+        "textSpan": {
+          "start": 0,
+          "end": 18
+        },
         "explanation": "Cuando estamos enojados a veces decimos cosas que después lamentamos."
       },
       {
         "clueId": "acantilado_02_clue_2",
         "category": "datos_sensibles",
-        "textSpan": { "start": 35, "end": 55 },
+        "textSpan": {
+          "start": 35,
+          "end": 55
+        },
         "explanation": "Contar esto a toda la colonia es demasiado."
       }
     ],
@@ -101,7 +126,11 @@
       {
         "clueId": "acantilado_03_clue_1",
         "category": "datos_sensibles",
-        "coordinates": { "x": 80, "y": 300, "radius": 40 },
+        "coordinates": {
+          "x": 80,
+          "y": 300,
+          "radius": 40
+        },
         "explanation": "¡Ahí se ve mi nombre completo y el de mi profesora!"
       }
     ],
@@ -117,19 +146,30 @@
       {
         "clueId": "glaciar_01_clue_1",
         "category": "datos_sensibles",
-        "coordinates": { "x": 50, "y": 200, "radius": 30 },
+        "coordinates": {
+          "x": 50,
+          "y": 200,
+          "radius": 30
+        },
         "explanation": "El reloj que uso tiene el logo de mi club."
       },
       {
         "clueId": "glaciar_01_clue_2",
         "category": "privacidad",
-        "coordinates": { "x": 250, "y": 350, "radius": 35 },
+        "coordinates": {
+          "x": 250,
+          "y": 350,
+          "radius": 35
+        },
         "explanation": "El cartel detrás de nosotros dice el nombre del lugar exacto."
       },
       {
         "clueId": "glaciar_01_clue_3",
         "category": "impulsividad",
-        "textSpan": { "start": 0, "end": 15 },
+        "textSpan": {
+          "start": 0,
+          "end": 15
+        },
         "explanation": "Publicar todo de golpe sin revisar es tentador, pero cada foto cuenta algo de nosotros."
       }
     ],
@@ -145,13 +185,19 @@
       {
         "clueId": "glaciar_02_clue_1",
         "category": "impulsividad",
-        "textSpan": { "start": 0, "end": 20 },
+        "textSpan": {
+          "start": 0,
+          "end": 20
+        },
         "explanation": "Esta info me la contaron, pero no estoy seguro si es cierta."
       },
       {
         "clueId": "glaciar_02_clue_2",
         "category": "datos_sensibles",
-        "textSpan": { "start": 50, "end": 75 },
+        "textSpan": {
+          "start": 50,
+          "end": 75
+        },
         "explanation": "El sector norte es donde vivo."
       }
     ],
@@ -167,14 +213,168 @@
       {
         "clueId": "glaciar_03_clue_1",
         "category": "datos_sensibles",
-        "coordinates": { "x": 180, "y": 120, "radius": 30 },
+        "coordinates": {
+          "x": 180,
+          "y": 120,
+          "radius": 30
+        },
         "explanation": "El horario de clases está pegado en la pared detrás de nosotros."
       },
       {
         "clueId": "glaciar_03_clue_2",
         "category": "privacidad",
-        "coordinates": { "x": 320, "y": 280, "radius": 35 },
+        "coordinates": {
+          "x": 320,
+          "y": 280,
+          "radius": 35
+        },
         "explanation": "Mis nuevos amigos también salen en la foto."
+      }
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "playa_04",
+    "type": "photo",
+    "nestLevelTarget": "playa",
+    "mediaUrl": "",
+    "promptText": "¡Hice un castillo de hielo increíble! ¿Lo comparto?",
+    "hiddenClues": [
+      {
+        "clueId": "playa_04_clue_1",
+        "category": "privacidad",
+        "coordinates": {
+          "x": 100,
+          "y": 100,
+          "radius": 40
+        },
+        "explanation": "Hay un paquete con la dirección de mi nido detrás del castillo."
+      }
+    ],
+    "difficulty": 1
+  },
+  {
+    "id": "playa_05",
+    "type": "message",
+    "nestLevelTarget": "playa",
+    "mediaUrl": "",
+    "promptText": "Un pingüino dice que regala pescados si le doy la clave de mi nido. ¿Se la doy?",
+    "hiddenClues": [
+      {
+        "clueId": "playa_05_clue_1",
+        "category": "datos_sensibles",
+        "textSpan": {
+          "start": 40,
+          "end": 58
+        },
+        "explanation": "Nunca debemos dar la clave o contraseña de nuestro nido a extraños."
+      }
+    ],
+    "difficulty": 1
+  },
+  {
+    "id": "acantilado_04",
+    "type": "photo",
+    "nestLevelTarget": "acantilado",
+    "mediaUrl": "",
+    "promptText": "¡Miren qué vista desde el acantilado! Salimos genial.",
+    "hiddenClues": [
+      {
+        "clueId": "acantilado_04_clue_1",
+        "category": "privacidad",
+        "coordinates": {
+          "x": 200,
+          "y": 150,
+          "radius": 40
+        },
+        "explanation": "En el fondo se ve claramente la entrada secreta al club de amigos."
+      },
+      {
+        "clueId": "acantilado_04_clue_2",
+        "category": "datos_sensibles",
+        "coordinates": {
+          "x": 300,
+          "y": 50,
+          "radius": 30
+        },
+        "explanation": "Uno de mis amigos tiene puesto un collar con su nombre completo."
+      }
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "acantilado_05",
+    "type": "message",
+    "nestLevelTarget": "acantilado",
+    "mediaUrl": "",
+    "promptText": "¡Acabo de romper la regla de no ir a la cueva de hielo sola! Fue muy divertido, ¿lo cuento?",
+    "hiddenClues": [
+      {
+        "clueId": "acantilado_05_clue_1",
+        "category": "impulsividad",
+        "textSpan": {
+          "start": 0,
+          "end": 45
+        },
+        "explanation": "Contar en línea que rompiste una regla de seguridad te puede meter en problemas."
+      }
+    ],
+    "difficulty": 2
+  },
+  {
+    "id": "glaciar_04",
+    "type": "photo",
+    "nestLevelTarget": "glaciar",
+    "mediaUrl": "",
+    "promptText": "Me encanta mi nuevo carnet de explorador. ¡Se lo voy a mostrar a todos!",
+    "hiddenClues": [
+      {
+        "clueId": "glaciar_04_clue_1",
+        "category": "datos_sensibles",
+        "coordinates": {
+          "x": 250,
+          "y": 250,
+          "radius": 50
+        },
+        "explanation": "El carnet muestra mi número de identificación de explorador y fecha de nacimiento."
+      },
+      {
+        "clueId": "glaciar_04_clue_2",
+        "category": "privacidad",
+        "coordinates": {
+          "x": 150,
+          "y": 300,
+          "radius": 40
+        },
+        "explanation": "En la foto del carnet también se ve el sello oficial que no debe compartirse."
+      }
+    ],
+    "difficulty": 3
+  },
+  {
+    "id": "glaciar_05",
+    "type": "message",
+    "nestLevelTarget": "glaciar",
+    "mediaUrl": "",
+    "promptText": "Me enviaron un enlace diciendo que gané un viaje al polo norte si doy mi dirección. ¡Qué emoción!",
+    "hiddenClues": [
+      {
+        "clueId": "glaciar_05_clue_1",
+        "category": "impulsividad",
+        "textSpan": {
+          "start": 0,
+          "end": 35
+        },
+        "explanation": "Hacer clic en enlaces de supuestos premios es muy peligroso."
+      },
+      {
+        "clueId": "glaciar_05_clue_2",
+        "category": "datos_sensibles",
+        "textSpan": {
+          "start": 60,
+          "end": 75
+        },
+        "explanation": "Nunca debemos dar nuestra dirección a extraños, incluso si prometen premios."
       }
     ],
     "difficulty": 3
