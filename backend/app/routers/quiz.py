@@ -34,6 +34,8 @@ QUIZ_QUESTIONS = [
     },
 ]
 
+QUIZ_QUESTIONS_BY_ID = {q["id"]: q for q in QUIZ_QUESTIONS}
+
 
 @router.post("/submit")
 async def submit_quiz(body: QuizSubmission, request: Request):
@@ -42,7 +44,7 @@ async def submit_quiz(body: QuizSubmission, request: Request):
     detailed = []
 
     for ans in body.answers:
-        q = next((q for q in QUIZ_QUESTIONS if q["id"] == ans.questionId), None)
+        q = QUIZ_QUESTIONS_BY_ID.get(ans.questionId)
         if q and ans.optionSelected in q["options"]:
             points = q["options"][ans.optionSelected]["points"]
             total += points
