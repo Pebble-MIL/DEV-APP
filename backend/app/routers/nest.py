@@ -33,12 +33,13 @@ async def get_nest(uid: str, request: Request):
     next_island = None
     for i in ISLANDS:
         if i["id"] not in unlocked_ids:
-            if i["requiredPebbles"] > 0:
-                progress = min(100, int(total / i["requiredPebbles"] * 100))
-            else:
-                progress = 100
-            next_island = {**i, "progress": progress}
+            next_island = i
             break
+
+    if next_island:
+        req = next_island["requiredPebbles"]
+        progress = min(100, int(total / req * 100)) if req > 0 else 100
+        next_island = {**next_island, "progress": progress}
 
     return {
         "pebbles": pebbles,
