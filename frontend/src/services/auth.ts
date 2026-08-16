@@ -17,7 +17,6 @@ export async function initFirebaseAuth(): Promise<{ app: any; auth: any }> {
     firebaseAuthModule = authMod.getAuth(firebaseApp)
     return { app: firebaseApp, auth: firebaseAuthModule }
   } catch {
-    console.log('Firebase not available — using dev auth mode')
     firebaseApp = { _isDev: true }
     firebaseAuthModule = { _isDev: true }
     return { app: firebaseApp, auth: firebaseAuthModule }
