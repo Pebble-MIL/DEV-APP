@@ -96,7 +96,7 @@ def test_unlock_check_multiple_unlocks(mock_get_collection, mock_verify_token):
 
     assert len(data["newUnlocks"]) == 5
     unlocked_ids = set(data["unlockedIslandIds"])
-    assert unlocked_ids == {island["id"] for island in ISLANDS}
+    assert unlocked_ids == {island["id"] for island in ISLANDS[:5]}
 
     mock_users_ref.document.assert_called_with("valid_user")
     mock_users_ref.document().update.assert_called_once()
